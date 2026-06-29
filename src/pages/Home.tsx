@@ -1,4 +1,5 @@
 import { Hero } from "@/components/sections/Hero";
+import { PinnedManifesto } from "@/components/sections/PinnedManifesto";
 import { About } from "@/components/sections/About";
 import { WhatWeDo } from "@/components/sections/WhatWeDo";
 import { Difference } from "@/components/sections/Difference";
@@ -16,6 +17,7 @@ export default function Home() {
   return (
     <>
       <Hero />
+      <PinnedManifesto />
       <About />
       <WhatWeDo />
       <Difference />
