@@ -18,11 +18,11 @@ const variants: Record<Variant, string> = {
   primary:
     "bg-navy-500 text-white hover:bg-red-500 hover:shadow-[0_10px_30px_-15px_rgba(187,28,28,0.6)]",
   ghost:
-    "bg-transparent text-navy-500 hover:bg-navy-500/5",
+    "bg-transparent text-paper hover:bg-navy-500/5",
   outline:
-    "bg-transparent border border-navy-500/20 text-navy-500 hover:border-navy-500 hover:bg-navy-500 hover:text-white",
+    "bg-transparent border border-navy-500/20 text-paper hover:border-navy-500 hover:bg-navy-500 hover:text-white",
   link:
-    "bg-transparent text-navy-500 hover:text-red-500 px-0 rounded-none",
+    "bg-transparent text-paper hover:text-red-500 px-0 rounded-none",
 };
 
 const sizes: Record<Size, string> = {

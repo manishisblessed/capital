@@ -13,7 +13,7 @@ export function About() {
   const yearScale = useTransform(scrollYProgress, [0, 0.5, 1], [0.98, 1, 1.02]);
 
   return (
-    <section ref={ref} className="relative py-32 lg:py-40 bg-paper overflow-hidden">
+    <section ref={ref} className="relative py-32 lg:py-40 bg-canvas overflow-hidden">
       <div className="container-tb relative">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-20">
           {/* Left — big year/figure */}
@@ -24,7 +24,7 @@ export function About() {
             >
               <p className="eyebrow mb-8">About Us</p>
               <div className="relative">
-                <span className="block font-display font-light text-navy-500 leading-none text-[clamp(8rem,18vw,18rem)] tracking-tighter">
+                <span className="block font-display font-light text-paper leading-none text-[clamp(8rem,18vw,18rem)] tracking-tighter">
                   30
                 </span>
                 <span className="absolute -bottom-2 left-2 text-sm uppercase tracking-[0.3em] text-red-500">
@@ -51,7 +51,7 @@ export function About() {
                   />
                 </motion.svg>
               </div>
-              <p className="mt-12 text-sm uppercase tracking-[0.22em] text-muted max-w-xs">
+              <p className="mt-12 text-sm uppercase tracking-[0.22em] text-paper/50 max-w-xs">
                 One discipline. Refined through every cycle.
               </p>
             </motion.div>
@@ -69,7 +69,7 @@ export function About() {
               </h2>
             </Reveal>
 
-            <div className="mt-12 space-y-7 text-lg leading-relaxed text-ink-soft max-w-2xl">
+            <div className="mt-12 space-y-7 text-lg leading-relaxed text-paper/75 max-w-2xl">
               <Reveal delay={0.1}>
                 <p>
                   Real estate is what we have done for more than three decades. Through every
@@ -80,9 +80,10 @@ export function About() {
               <Reveal delay={0.2}>
                 <p>
                   Over the years, that discipline has taken different forms — portfolio
-                  management services, our two SEBI-registered Category II AIFs, and a number of
-                  exclusive, deal-level transactions structured directly with family offices.
-                  <span className="text-navy-500 font-medium"> The vehicle has changed. The discipline has not.</span>
+                  management services, our two SEBI-registered Category II AIFs, Landmark
+                  Opportunity Fund and Landmark Multiplier Fund, and a number of exclusive,
+                  deal-level transactions structured directly with family offices.
+                  <span className="text-paper font-medium"> The vehicle has changed. The discipline has not.</span>
                 </p>
               </Reveal>
             </div>
@@ -133,24 +134,24 @@ function FundChip({
       ref={tiltRef}
       className={`group relative p-6 rounded-3xl border transition-[border-color,background-color] duration-500 ${
         highlight
-          ? "border-red-500/20 bg-red-50/40 hover:border-red-500/40"
-          : "border-rule bg-mist/60 hover:border-navy-500/30"
+          ? "border-red-500/40 bg-red-500/10 hover:border-red-500/60 hover:bg-red-500/15"
+          : "border-white/10 bg-white/[0.03] hover:border-white/25"
       }`}
     >
       <div className="flex items-start justify-between gap-3">
         <div>
-          <p className="text-[10px] uppercase tracking-[0.22em] text-muted">{category}</p>
-          <h3 className="display-3 mt-2 text-navy-500">{title}</h3>
+          <p className="text-[10px] uppercase tracking-[0.22em] text-paper/50">{category}</p>
+          <h3 className="display-3 mt-2 text-paper">{title}</h3>
         </div>
         <span
           className={`text-[10px] uppercase tracking-[0.2em] px-3 py-1 rounded-full ${
-            highlight ? "bg-red-500 text-white" : "bg-navy-500/10 text-navy-500"
+            highlight ? "bg-red-500 text-white" : "bg-white/5 text-paper"
           }`}
         >
           {status}
         </span>
       </div>
-      <p className="mt-4 text-xs font-mono text-muted">{reg}</p>
+      <p className="mt-4 text-xs font-mono text-paper/50">{reg}</p>
     </div>
   );
 }

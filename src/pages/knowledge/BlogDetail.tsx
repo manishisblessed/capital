@@ -23,14 +23,14 @@ export default function BlogDetail() {
   const otherBlogs = blogs.filter((b) => b.slug !== slug).slice(0, 3);
 
   return (
-    <article className="bg-paper">
+    <article className="bg-canvas">
       {/* Header */}
-      <header className="pt-40 lg:pt-52 pb-16 lg:pb-24 border-b border-rule">
+      <header className="pt-40 lg:pt-52 pb-16 lg:pb-24 border-b border-white/10">
         <div className="container-narrow">
           <Reveal>
             <Link
               to="/knowledge/blogs"
-              className="inline-flex items-center gap-2 text-xs uppercase tracking-[0.22em] text-muted hover:text-red-500 transition-colors mb-12"
+              className="inline-flex items-center gap-2 text-xs uppercase tracking-[0.22em] text-paper/50 hover:text-red-500 transition-colors mb-12"
             >
               <ArrowLeft size={14} />
               All Articles
@@ -45,15 +45,15 @@ export default function BlogDetail() {
           </Reveal>
 
           <Reveal delay={0.25}>
-            <div className="mt-12 flex flex-wrap items-center gap-6 pt-8 border-t border-rule">
+            <div className="mt-12 flex flex-wrap items-center gap-6 pt-8 border-t border-white/10">
               <div>
-                <p className="text-[10px] uppercase tracking-[0.22em] text-muted">Author</p>
-                <p className="text-base text-navy-500 mt-1">{blog.author}</p>
+                <p className="text-[10px] uppercase tracking-[0.22em] text-paper/50">Author</p>
+                <p className="text-base text-paper mt-1">{blog.author}</p>
               </div>
-              <div className="w-px h-10 bg-rule" />
+              <div className="w-px h-10 bg-white/10" />
               <div>
-                <p className="text-[10px] uppercase tracking-[0.22em] text-muted">Published</p>
-                <p className="text-base text-navy-500 mt-1">{formatDate(blog.date)}</p>
+                <p className="text-[10px] uppercase tracking-[0.22em] text-paper/50">Published</p>
+                <p className="text-base text-paper mt-1">{formatDate(blog.date)}</p>
               </div>
             </div>
           </Reveal>
@@ -64,15 +64,15 @@ export default function BlogDetail() {
       <section className="py-20 lg:py-28">
         <div className="container-narrow">
           <Reveal>
-            <p className="font-display text-2xl lg:text-3xl leading-relaxed text-navy-500 italic mb-16 text-balance">
+            <p className="font-display text-2xl lg:text-3xl leading-relaxed text-paper italic mb-16 text-balance">
               "{blog.excerpt}"
             </p>
           </Reveal>
 
           <Reveal delay={0.1}>
-            <div className="prose-styles space-y-7 text-lg leading-relaxed text-ink-soft">
+            <div className="prose-styles space-y-7 text-lg leading-relaxed text-paper/75">
               <p>
-                This article is part of TridentBay's ongoing series on the structural shifts
+                This article is part of Landmark Capital's ongoing series on the structural shifts
                 reshaping Indian real estate and investment markets. The full piece will be
                 published shortly.
               </p>
@@ -84,10 +84,10 @@ export default function BlogDetail() {
           </Reveal>
 
           <Reveal delay={0.2}>
-            <div className="mt-20 pt-10 border-t border-rule">
+            <div className="mt-20 pt-10 border-t border-white/10">
               <Link
                 to="/contact"
-                className="inline-flex items-center gap-2 text-sm uppercase tracking-[0.18em] text-navy-500 link-underline"
+                className="inline-flex items-center gap-2 text-sm uppercase tracking-[0.18em] text-paper link-underline"
               >
                 Get in touch
                 <ArrowUpRight size={16} />
@@ -98,7 +98,7 @@ export default function BlogDetail() {
       </section>
 
       {/* Other articles */}
-      <section className="py-20 lg:py-28 bg-cream">
+      <section className="py-20 lg:py-28 bg-canvas-2">
         <div className="container-tb">
           <p className="eyebrow mb-10">Continue Reading</p>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
@@ -112,17 +112,17 @@ export default function BlogDetail() {
               >
                 <Link
                   to={`/knowledge/blogs/${b.slug}`}
-                  className="group block p-8 bg-paper border border-rule rounded-3xl h-full hover:border-red-500/30 transition-all"
+                  className="group block p-8 bg-canvas border border-white/10 rounded-3xl h-full hover:border-red-500/30 transition-all"
                 >
                   {b.category && (
                     <p className="text-[10px] uppercase tracking-[0.22em] text-red-500 mb-4">
                       {b.category}
                     </p>
                   )}
-                  <h3 className="font-display text-xl text-navy-500 mb-4 group-hover:text-red-500 transition-colors leading-snug">
+                  <h3 className="font-display text-xl text-paper mb-4 group-hover:text-red-500 transition-colors leading-snug">
                     {b.title}
                   </h3>
-                  <p className="text-sm text-muted">
+                  <p className="text-sm text-paper/50">
                     {b.author} · {formatDate(b.date)}
                   </p>
                 </Link>

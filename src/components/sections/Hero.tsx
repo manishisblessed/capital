@@ -1,13 +1,35 @@
-import { motion, useScroll, useTransform } from "framer-motion";
-import { useRef } from "react";
+import { motion, AnimatePresence, useScroll, useTransform } from "framer-motion";
+import { lazy, Suspense, useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
-import { RevealText } from "@/components/common/Reveal";
 import { useMagnetic } from "@/hooks/useMagnetic";
 import { ArrowDown, ArrowUpRight } from "lucide-react";
 import { ScrollVelocityText } from "@/components/common/ScrollVelocityText";
 
+const SceneCanvas = lazy(() =>
+  import("@/components/common/SceneCanvas").then((m) => ({ default: m.SceneCanvas }))
+);
+
 const principlesText =
   "AIF · LVF · Deal-by-Deal · Patient Capital · Pan-India · SEBI-Registered · Operational Investor · Selected Deals · ";
+
+/**
+ * Rotating accent phrases — the three tagline beats from the reference
+ * ("Patient capital. Selected deals. Built for India.") cycled via a
+ * "clip" wipe, matching the client-referenced `wpr-anim-text-clip`.
+ */
+const rotatingPhrases = [
+  "Patient capital.",
+  "Selected deals.",
+  "Built for India.",
+];
+
+/**
+ * Full-bleed cinematic photo hero. Swap `heroImage` for a licensed
+ * client-approved asset when supplied — the URL below is a temporary
+ * Unsplash architectural photo that fits Landmark's positioning.
+ */
+const heroImage =
+  "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=2400&q=85";
 
 export function Hero() {
   const containerRef = useRef<HTMLDivElement>(null);
@@ -15,11 +37,10 @@ export function Hero() {
     target: containerRef,
     offset: ["start start", "end start"],
   });
-  const buildingY = useTransform(scrollYProgress, [0, 1], ["0%", "30%"]);
-  const buildingOpacity = useTransform(scrollYProgress, [0, 0.6, 1], [1, 0.6, 0]);
-  const titleY = useTransform(scrollYProgress, [0, 1], ["0%", "-30%"]);
+  const imgY = useTransform(scrollYProgress, [0, 1], ["0%", "18%"]);
+  const imgScale = useTransform(scrollYProgress, [0, 1], [1, 1.08]);
+  const contentY = useTransform(scrollYProgress, [0, 1], ["0%", "-20%"]);
   const cueOpacity = useTransform(scrollYProgress, [0, 0.15], [1, 0]);
-  const gridOpacity = useTransform(scrollYProgress, [0, 0.7], [0.5, 0]);
 
   const cta1 = useMagnetic<HTMLAnchorElement>(0.3);
   const cta2 = useMagnetic<HTMLAnchorElement>(0.3);
@@ -27,63 +48,87 @@ export function Hero() {
   return (
     <section
       ref={containerRef}
-      className="relative min-h-[100svh] overflow-hidden bg-paper noise-overlay flex items-center"
+      className="relative min-h-[100svh] overflow-hidden flex items-center bg-navy-900"
     >
-      {/* Background grid */}
-      <motion.div style={{ opacity: gridOpacity }} className="absolute inset-0 grid-backdrop" />
-
-      {/* Animated building wireframe */}
+      {/* Background photograph — slow ken-burns + parallax */}
       <motion.div
-        style={{ y: buildingY, opacity: buildingOpacity }}
-        className="absolute right-0 top-0 bottom-0 w-full md:w-[55%] lg:w-[50%] pointer-events-none"
+        aria-hidden
+        style={{ y: imgY, scale: imgScale }}
+        className="absolute inset-0 will-change-transform"
       >
-        <BuildingWireframe />
+        <motion.img
+          src={heroImage}
+          alt=""
+          className="w-full h-full object-cover"
+          initial={{ scale: 1.08, opacity: 0 }}
+          animate={{ scale: 1, opacity: 1 }}
+          transition={{ duration: 2, ease: [0.16, 1, 0.3, 1] }}
+        />
       </motion.div>
 
-      {/* Diagonal lines */}
-      <svg className="absolute right-[10%] top-[20%] opacity-20 pointer-events-none" width="220" height="220" viewBox="0 0 220 220" fill="none" aria-hidden>
-        {Array.from({ length: 8 }).map((_, i) => (
-          <line
-            key={i}
-            x1={i * 30}
-            y1={220}
-            x2={220}
-            y2={i * 30}
-            stroke="#bb1c1c"
-            strokeWidth="0.6"
-          />
-        ))}
-      </svg>
+      {/* Brand-tinted overlay stack — keeps navy identity, protects legibility */}
+      <div
+        aria-hidden
+        className="absolute inset-0 bg-gradient-to-br from-canvas/90 via-navy-800/80 to-navy-500/60"
+      />
+      <div
+        aria-hidden
+        className="absolute inset-0 bg-gradient-to-t from-canvas/95 via-transparent to-canvas/50"
+      />
+      <div aria-hidden className="absolute inset-0 grid-backdrop opacity-[0.08]" />
+
+      {/* WebGL 3D layer — floating architectural wireframes with mouse parallax */}
+      <Suspense fallback={null}>
+        <SceneCanvas className="mix-blend-screen opacity-90" parallaxStrength={0.4} />
+      </Suspense>
+
+      {/* Corner rule marks */}
+      <CornerMark className="top-8 left-6 lg:top-10 lg:left-10" />
+      <CornerMark className="top-8 right-6 lg:top-10 lg:right-10" flip />
 
       {/* Content */}
-      <motion.div style={{ y: titleY }} className="container-tb relative z-10 pt-32 lg:pt-24">
-        <div className="max-w-4xl">
+      <motion.div
+        style={{ y: contentY }}
+        className="container-tb relative z-10 pt-32 lg:pt-24 pb-32"
+      >
+        <div className="max-w-5xl">
           <motion.p
             initial={{ opacity: 0, y: 12 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
-            className="eyebrow mb-8 inline-flex items-center gap-3"
+            transition={{ duration: 0.9, delay: 0.3, ease: [0.16, 1, 0.3, 1] }}
+            className="eyebrow mb-8 inline-flex items-center gap-3 text-red-300"
           >
-            <span className="h-px w-10 bg-red-500" />
-            TridentBay Asset Managers
+            <span className="h-px w-10 bg-red-400/80" />
+            Landmark Capital
           </motion.p>
 
-          <h1 className="display-1 text-balance text-navy-500">
-            <RevealText text="Not More Real Estate." />
+          {/* Flagship headline — from reference line 4 */}
+          <motion.h1
+            initial={{ opacity: 0, y: 24, filter: "blur(6px)" }}
+            animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+            transition={{ duration: 1.1, delay: 0.5, ease: [0.16, 1, 0.3, 1] }}
+            className="display-1 text-balance !text-paper"
+          >
+            Not More Real Estate.
             <br />
-            <span className="italic font-light text-navy-500/90">
-              <RevealText text="Better Real Estate." delay={0.4} />
+            <span className="font-light italic text-paper/95">
+              Better Real Estate.
             </span>
-          </h1>
+          </motion.h1>
 
-          <motion.p
-            initial={{ opacity: 0, y: 20 }}
+          {/* Rotating clip accent — cycles the three tagline beats from reference line 5 */}
+          <motion.div
+            initial={{ opacity: 0, y: 18 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 1, delay: 1.2, ease: [0.16, 1, 0.3, 1] }}
-            className="mt-8 text-lg lg:text-xl text-ink-soft max-w-xl leading-relaxed"
+            className="mt-10 lg:mt-12 flex items-baseline gap-4"
           >
-            Patient capital. Selected deals. Built for India.
-          </motion.p>
+            <span
+              aria-hidden
+              className="hidden sm:block h-[2px] w-14 bg-red-400 shrink-0 translate-y-[-0.35em]"
+            />
+            <ClipRotator phrases={rotatingPhrases} />
+          </motion.div>
 
           <motion.div
             initial={{ opacity: 0, y: 16 }}
@@ -94,15 +139,18 @@ export function Hero() {
             <Link
               ref={cta1}
               to="/our-business"
-              className="group relative inline-flex items-center gap-3 px-8 h-14 bg-navy-500 text-paper rounded-full text-sm uppercase tracking-[0.18em] transition-colors duration-500 hover:bg-red-500 will-change-transform"
+              className="group relative inline-flex items-center gap-3 px-8 h-14 bg-red-500 text-paper rounded-full text-sm uppercase tracking-[0.18em] transition-colors duration-500 hover:bg-red-600 will-change-transform"
             >
               <span>Explore Our Business</span>
-              <ArrowUpRight size={16} className="transition-transform duration-500 group-hover:translate-x-1 group-hover:-translate-y-1" />
+              <ArrowUpRight
+                size={16}
+                className="transition-transform duration-500 group-hover:translate-x-1 group-hover:-translate-y-1"
+              />
             </Link>
             <Link
               ref={cta2}
               to="/funds/multiplier"
-              className="group inline-flex items-center gap-3 h-14 px-2 text-sm uppercase tracking-[0.18em] text-navy-500 will-change-transform link-underline"
+              className="group inline-flex items-center gap-3 h-14 px-2 text-sm uppercase tracking-[0.18em] text-paper will-change-transform link-underline"
             >
               <span>Multiplier Fund — Open</span>
               <span className="relative flex h-2 w-2">
@@ -116,7 +164,7 @@ export function Hero() {
         {/* Scroll cue */}
         <motion.div
           style={{ opacity: cueOpacity }}
-          className="absolute bottom-10 left-1/2 -translate-x-1/2"
+          className="absolute bottom-24 left-1/2 -translate-x-1/2"
         >
           <motion.div
             initial={{ opacity: 0 }}
@@ -124,11 +172,13 @@ export function Hero() {
             transition={{ delay: 2 }}
             className="flex flex-col items-center gap-3"
           >
-            <span className="text-[10px] tracking-[0.3em] uppercase text-muted">Scroll</span>
+            <span className="text-[10px] tracking-[0.3em] uppercase text-paper/60">
+              Scroll
+            </span>
             <motion.div
               animate={{ y: [0, 8, 0] }}
               transition={{ repeat: Infinity, duration: 1.8, ease: "easeInOut" }}
-              className="text-navy-500"
+              className="text-paper/80"
             >
               <ArrowDown size={16} />
             </motion.div>
@@ -136,8 +186,8 @@ export function Hero() {
         </motion.div>
       </motion.div>
 
-      {/* Marquee strip at very bottom — reacts to scroll velocity */}
-      <div className="absolute bottom-0 left-0 right-0 border-y border-rule bg-navy-500 text-paper py-3">
+      {/* Marquee strip at bottom */}
+      <div className="absolute bottom-0 left-0 right-0 border-t border-white/10 bg-navy-900/85 backdrop-blur-sm text-paper py-3 z-20">
         <ScrollVelocityText
           text={principlesText}
           baseVelocity={1.2}
@@ -149,149 +199,88 @@ export function Hero() {
 }
 
 /**
- * Animated SVG building wireframe — abstract architectural sketch.
- * Lines draw in on mount via strokeDashoffset animation.
+ * Clip-wipe rotating text. Cycles `phrases` on an interval, wiping
+ * the outgoing word out to the right and revealing the incoming one
+ * from the left — the same visual language as the referenced
+ * `wpr-anim-text-clip` widget, but framer-motion driven.
  */
-function BuildingWireframe() {
+function ClipRotator({
+  phrases,
+  interval = 2600,
+}: {
+  phrases: string[];
+  interval?: number;
+}) {
+  const [active, setActive] = useState(0);
+  const longest = phrases.reduce((a, b) => (a.length >= b.length ? a : b));
+
+  useEffect(() => {
+    const id = window.setInterval(
+      () => setActive((i) => (i + 1) % phrases.length),
+      interval
+    );
+    return () => window.clearInterval(id);
+  }, [phrases.length, interval]);
+
   return (
-    <svg
-      viewBox="0 0 600 800"
-      className="w-full h-full"
+    <span
+      aria-live="polite"
+      className="relative inline-block font-display italic font-light leading-[1] text-[clamp(1.5rem,3.2vw,2.75rem)] tracking-tight text-red-300"
+    >
+      {/* Invisible sizer — reserves width for the longest phrase so the layout doesn't jump */}
+      <span className="invisible whitespace-nowrap" aria-hidden>
+        {longest}
+      </span>
+
+      <span className="absolute inset-0 overflow-hidden">
+        <AnimatePresence mode="wait">
+          <motion.span
+            key={phrases[active]}
+            initial={{ clipPath: "inset(0 100% 0 0)", y: "0.05em" }}
+            animate={{ clipPath: "inset(0 0% 0 0)", y: "0em" }}
+            exit={{ clipPath: "inset(0 0 0 100%)", y: "-0.05em" }}
+            transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
+            className="inline-block whitespace-nowrap"
+          >
+            {phrases[active]}
+          </motion.span>
+        </AnimatePresence>
+      </span>
+
+      {/* Blinking cursor — anchors the animation visually */}
+      <span
+        aria-hidden
+        className="absolute -right-3 top-[0.1em] bottom-[0.15em] w-[3px] bg-red-400/80 animate-blink"
+      />
+    </span>
+  );
+}
+
+function CornerMark({
+  className,
+  flip = false,
+}: {
+  className?: string;
+  flip?: boolean;
+}) {
+  return (
+    <motion.svg
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ duration: 1, delay: 1.6 }}
+      className={`absolute w-8 h-8 lg:w-12 lg:h-12 pointer-events-none z-10 ${
+        flip ? "scale-x-[-1]" : ""
+      } ${className ?? ""}`}
+      viewBox="0 0 48 48"
       fill="none"
       aria-hidden
-      preserveAspectRatio="xMidYMid meet"
     >
-      <defs>
-        <linearGradient id="ink" x1="0" y1="0" x2="0" y2="800" gradientUnits="userSpaceOnUse">
-          <stop offset="0" stopColor="#04036b" stopOpacity="0.7" />
-          <stop offset="1" stopColor="#04036b" stopOpacity="0.15" />
-        </linearGradient>
-        <linearGradient id="accent" x1="0" y1="0" x2="0" y2="800" gradientUnits="userSpaceOnUse">
-          <stop offset="0" stopColor="#bb1c1c" stopOpacity="0.9" />
-          <stop offset="1" stopColor="#bb1c1c" stopOpacity="0.2" />
-        </linearGradient>
-      </defs>
-
-      <g>
-        {/* Main tall tower */}
-        <motion.path
-          d="M 340 130 L 340 760 L 470 760 L 470 200 Z"
-          stroke="url(#ink)"
-          strokeWidth="1.2"
-          initial={{ pathLength: 0 }}
-          animate={{ pathLength: 1 }}
-          transition={{ duration: 2.5, delay: 0.5, ease: [0.16, 1, 0.3, 1] }}
-        />
-        {/* Tower windows grid */}
-        {Array.from({ length: 22 }).map((_, row) =>
-          Array.from({ length: 5 }).map((_, col) => (
-            <motion.rect
-              key={`tower-${row}-${col}`}
-              x={350 + col * 24}
-              y={160 + row * 26}
-              width="14"
-              height="14"
-              stroke="url(#ink)"
-              strokeWidth="0.5"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: Math.random() > 0.7 ? 0.9 : 0.35 }}
-              transition={{ duration: 0.6, delay: 1.5 + row * 0.04 + col * 0.02 }}
-            />
-          ))
-        )}
-
-        {/* Shorter mid building */}
-        <motion.path
-          d="M 200 320 L 200 760 L 330 760 L 330 360 Z"
-          stroke="url(#ink)"
-          strokeWidth="1.2"
-          initial={{ pathLength: 0 }}
-          animate={{ pathLength: 1 }}
-          transition={{ duration: 2.5, delay: 1, ease: [0.16, 1, 0.3, 1] }}
-        />
-        {Array.from({ length: 14 }).map((_, row) =>
-          Array.from({ length: 4 }).map((_, col) => (
-            <motion.rect
-              key={`mid-${row}-${col}`}
-              x={210 + col * 28}
-              y={340 + row * 30}
-              width="18"
-              height="18"
-              stroke="url(#ink)"
-              strokeWidth="0.5"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: Math.random() > 0.65 ? 0.85 : 0.25 }}
-              transition={{ duration: 0.6, delay: 1.8 + row * 0.05 + col * 0.02 }}
-            />
-          ))
-        )}
-
-        {/* Far short building */}
-        <motion.path
-          d="M 80 450 L 80 760 L 190 760 L 190 480 Z"
-          stroke="url(#ink)"
-          strokeWidth="1.2"
-          initial={{ pathLength: 0 }}
-          animate={{ pathLength: 1 }}
-          transition={{ duration: 2.2, delay: 1.5, ease: [0.16, 1, 0.3, 1] }}
-        />
-        {Array.from({ length: 9 }).map((_, row) =>
-          Array.from({ length: 3 }).map((_, col) => (
-            <motion.rect
-              key={`far-${row}-${col}`}
-              x={92 + col * 32}
-              y={460 + row * 32}
-              width="22"
-              height="20"
-              stroke="url(#ink)"
-              strokeWidth="0.5"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: Math.random() > 0.6 ? 0.7 : 0.2 }}
-              transition={{ duration: 0.6, delay: 2.2 + row * 0.05 + col * 0.02 }}
-            />
-          ))
-        )}
-
-        {/* Red accent — central tall spine */}
-        <motion.line
-          x1="405"
-          y1="130"
-          x2="405"
-          y2="760"
-          stroke="url(#accent)"
-          strokeWidth="2.5"
-          initial={{ pathLength: 0 }}
-          animate={{ pathLength: 1 }}
-          transition={{ duration: 2, delay: 1.8, ease: [0.16, 1, 0.3, 1] }}
-        />
-
-        {/* Red marker dots */}
-        {[180, 280, 420, 560].map((y, i) => (
-          <motion.circle
-            key={i}
-            cx="405"
-            cy={y}
-            r="4"
-            fill="#bb1c1c"
-            initial={{ scale: 0 }}
-            animate={{ scale: 1 }}
-            transition={{ duration: 0.5, delay: 3 + i * 0.15, ease: "backOut" }}
-          />
-        ))}
-
-        {/* Ground line */}
-        <motion.line
-          x1="40"
-          y1="760"
-          x2="540"
-          y2="760"
-          stroke="#04036b"
-          strokeWidth="1"
-          initial={{ pathLength: 0 }}
-          animate={{ pathLength: 1 }}
-          transition={{ duration: 1.5, delay: 0.3 }}
-        />
-      </g>
-    </svg>
+      <path
+        d="M2 2 L14 2 M2 2 L2 14"
+        stroke="#f5c5c5"
+        strokeWidth="1"
+        strokeOpacity="0.6"
+      />
+    </motion.svg>
   );
 }

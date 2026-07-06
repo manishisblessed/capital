@@ -68,14 +68,14 @@ export default function MultiplierFund() {
           <span className="px-4 py-1.5 rounded-full bg-red-500 text-paper text-[10px] uppercase tracking-[0.2em]">
             Open For Subscription
           </span>
-          <span className="px-4 py-1.5 rounded-full bg-navy-500/10 text-navy-500 text-[10px] uppercase tracking-[0.2em] font-mono">
+          <span className="px-4 py-1.5 rounded-full bg-white/5 text-paper text-[10px] uppercase tracking-[0.2em] font-mono">
             IN/AIF2/21-22/0928
           </span>
         </div>
       </PageHero>
 
       {/* Why Warehousing */}
-      <section className="py-28 lg:py-36 bg-paper">
+      <section className="py-28 lg:py-36 bg-canvas">
         <div className="container-tb">
           <div className="grid lg:grid-cols-12 gap-12 mb-16">
             <div className="lg:col-span-5">
@@ -88,7 +88,7 @@ export default function MultiplierFund() {
             </div>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-px bg-rule rounded-3xl overflow-hidden">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-px bg-white/10 rounded-3xl overflow-hidden">
             {whyWarehousing.map((item, i) => (
               <motion.div
                 key={item.title}
@@ -96,15 +96,15 @@ export default function MultiplierFund() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.7, delay: i * 0.06, ease: [0.16, 1, 0.3, 1] }}
-                className="bg-paper p-10 hover:bg-cream transition-colors duration-500 relative"
+                className="bg-canvas p-10 hover:bg-canvas-2 transition-colors duration-500 relative"
               >
                 <span className="absolute top-6 right-6 font-display text-2xl text-rule">
                   {String(i + 1).padStart(2, "0")}
                 </span>
-                <h3 className="font-display text-xl text-navy-500 mb-4 mt-4 max-w-[200px]">
+                <h3 className="font-display text-xl text-paper mb-4 mt-4 max-w-[200px]">
                   {item.title}
                 </h3>
-                <p className="text-sm leading-relaxed text-ink-soft">{item.body}</p>
+                <p className="text-sm leading-relaxed text-paper/75">{item.body}</p>
               </motion.div>
             ))}
           </div>
@@ -149,7 +149,7 @@ export default function MultiplierFund() {
       </section>
 
       {/* Highlights */}
-      <section className="py-28 lg:py-36 bg-paper">
+      <section className="py-28 lg:py-36 bg-canvas">
         <div className="container-tb">
           <Reveal>
             <p className="eyebrow mb-6">Fund Highlights</p>
@@ -158,7 +158,7 @@ export default function MultiplierFund() {
             </h2>
           </Reveal>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-px bg-rule rounded-3xl overflow-hidden">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-px bg-white/10 rounded-3xl overflow-hidden">
             {highlights.map((h, i) => (
               <motion.div
                 key={h.label}
@@ -166,15 +166,15 @@ export default function MultiplierFund() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.7, delay: i * 0.08, ease: [0.16, 1, 0.3, 1] }}
-                className="bg-paper p-10 lg:p-12"
+                className="bg-canvas p-10 lg:p-12"
               >
                 <p className="text-[10px] uppercase tracking-[0.22em] text-red-500 mb-6">
                   {h.label}
                 </p>
-                <p className="font-display text-4xl lg:text-5xl text-navy-500 mb-4 leading-none">
+                <p className="font-display text-4xl lg:text-5xl text-paper mb-4 leading-none">
                   {h.value}
                 </p>
-                <p className="text-xs text-muted leading-relaxed">{h.note}</p>
+                <p className="text-xs text-paper/50 leading-relaxed">{h.note}</p>
               </motion.div>
             ))}
           </div>

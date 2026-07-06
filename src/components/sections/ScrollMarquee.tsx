@@ -19,13 +19,13 @@ export function ScrollMarquee() {
   return (
     <section
       ref={ref}
-      className="relative py-32 lg:py-44 bg-paper overflow-hidden noise-overlay"
+      className="relative py-32 lg:py-44 bg-canvas overflow-hidden noise-overlay"
       aria-hidden="true"
     >
       {/* Top hairline */}
       <motion.div
         style={{ scaleX: lineScale }}
-        className="absolute top-0 left-0 right-0 h-px bg-navy-500/20 origin-left"
+        className="absolute top-0 left-0 right-0 h-px bg-white/10 origin-left"
       />
 
       {/* Two opposing scroll-velocity lines */}
@@ -33,20 +33,20 @@ export function ScrollMarquee() {
         <ScrollVelocityText
           text="Patient capital · Selected deals · Built for India · "
           baseVelocity={-2}
-          className="font-display font-light text-[clamp(4rem,12vw,12rem)] leading-[1] text-navy-500 tracking-tighter"
+          className="font-display font-light text-[clamp(4rem,12vw,12rem)] leading-[1] text-paper tracking-tighter"
         />
         <div className="h-4 lg:h-8" />
         <ScrollVelocityText
           text="Underwrite · Structure · Execute · Exit · "
           baseVelocity={3}
-          className="font-display italic font-light text-[clamp(3rem,10vw,10rem)] leading-[1] text-red-500/90 tracking-tighter"
+          className="font-display italic font-light text-[clamp(3rem,10vw,10rem)] leading-[1] text-red-400/90 tracking-tighter"
         />
       </motion.div>
 
       {/* Bottom hairline */}
       <motion.div
         style={{ scaleX: lineScale }}
-        className="absolute bottom-0 left-0 right-0 h-px bg-navy-500/20 origin-right"
+        className="absolute bottom-0 left-0 right-0 h-px bg-white/10 origin-right"
       />
     </section>
   );

@@ -12,7 +12,7 @@ export function TrackRecord() {
   const lineScale = useTransform(scrollYProgress, [0, 1], [0, 1]);
 
   return (
-    <section ref={ref} className="relative py-32 lg:py-40 bg-paper overflow-hidden">
+    <section ref={ref} className="relative py-32 lg:py-40 bg-canvas overflow-hidden">
       <div className="container-tb">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 mb-20">
           <div className="lg:col-span-7">
@@ -27,7 +27,7 @@ export function TrackRecord() {
           </div>
           <div className="lg:col-span-5 lg:pt-6">
             <Reveal delay={0.2}>
-              <p className="text-base lg:text-lg text-ink-soft leading-relaxed">
+              <p className="text-base lg:text-lg text-paper/75 leading-relaxed">
                 Grounded in careful underwriting, aligned execution, and long-term value creation.
                 Since 2013, we've worked across <em>twelve Indian cities</em> and three core asset
                 classes — building a portfolio of over <em>six million square feet</em>.
@@ -42,10 +42,10 @@ export function TrackRecord() {
             style={{ scaleX: lineScale }}
             className="absolute top-0 left-0 right-0 h-px bg-red-500 origin-left"
           />
-          <h3 className="font-display text-xl text-muted mt-10 mb-12 uppercase tracking-[0.18em]">
+          <h3 className="font-display text-xl text-paper/50 mt-10 mb-12 uppercase tracking-[0.18em]">
             Current Portfolio Scale
           </h3>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-px bg-rule">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-px bg-white/10">
             {portfolioStats.map((s, i) => (
               <StatCard key={s.label} stat={s} index={i} />
             ))}
@@ -54,10 +54,10 @@ export function TrackRecord() {
 
         {/* Team track record */}
         <div className="mt-24">
-          <h3 className="font-display text-xl text-muted mb-12 uppercase tracking-[0.18em]">
+          <h3 className="font-display text-xl text-paper/50 mb-12 uppercase tracking-[0.18em]">
             Team's Track Record
           </h3>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-px bg-rule">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-px bg-white/10">
             {trackRecord.map((s, i) => (
               <StatCard key={s.label} stat={s} index={i} variant="dark" />
             ))}
@@ -99,13 +99,13 @@ function StatCard({
       viewport={{ once: true }}
       transition={{ duration: 0.7, delay: index * 0.1, ease: [0.16, 1, 0.3, 1] }}
       className={`relative p-10 lg:p-12 ${
-        variant === "dark" ? "bg-navy-500 text-paper" : "bg-paper"
+        variant === "dark" ? "bg-navy-500 text-paper" : "bg-canvas"
       }`}
     >
       <div className="flex items-baseline gap-1">
         <span
           className={`font-display font-light text-[clamp(3.5rem,8vw,6rem)] leading-none tabular-nums ${
-            variant === "dark" ? "text-paper" : "text-navy-500"
+            variant === "dark" ? "text-paper" : "text-paper"
           }`}
         >
           {display}
@@ -122,14 +122,14 @@ function StatCard({
       </div>
       <p
         className={`mt-6 text-sm uppercase tracking-[0.18em] ${
-          variant === "dark" ? "text-paper/70" : "text-navy-500"
+          variant === "dark" ? "text-paper/70" : "text-paper"
         }`}
       >
         {stat.label}
       </p>
       <p
         className={`mt-2 text-xs leading-relaxed max-w-[260px] ${
-          variant === "dark" ? "text-paper/50" : "text-muted"
+          variant === "dark" ? "text-paper/50" : "text-paper/50"
         }`}
       >
         {stat.description}

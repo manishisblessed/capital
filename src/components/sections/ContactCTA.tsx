@@ -14,7 +14,7 @@ export function ContactCTA() {
   const bgColor = useTransform(
     scrollYProgress,
     [0, 0.3, 0.7, 1],
-    ["#f3eee5", "#f7e7d8", "#f9dccc", "#fbd0bf"]
+    ["#050418", "#0a0930", "#10104b", "#1a1949"]
   );
   const ringScale = useTransform(scrollYProgress, [0, 1], [0.6, 1.4]);
   const ringOpacity = useTransform(scrollYProgress, [0, 0.5, 1], [0, 0.5, 0]);
@@ -55,27 +55,27 @@ export function ContactCTA() {
               <Link
                 ref={ctaMagnet}
                 to="/contact"
-                className="group inline-flex items-center gap-4 text-navy-500 will-change-transform"
+                className="group inline-flex items-center gap-4 text-paper will-change-transform"
               >
                 <span className="grid place-items-center w-20 h-20 lg:w-24 lg:h-24 rounded-full bg-navy-500 text-paper transition-all duration-700 group-hover:bg-red-500 group-hover:scale-110">
                   <ArrowUpRight size={28} className="transition-transform duration-700 group-hover:rotate-45" />
                 </span>
                 <span className="flex flex-col">
-                  <span className="text-xs uppercase tracking-[0.22em] text-muted">Contact</span>
-                  <span className="font-display text-2xl">TridentBay</span>
+                  <span className="text-xs uppercase tracking-[0.22em] text-paper/50">Contact</span>
+                  <span className="font-display text-2xl">Landmark Capital</span>
                 </span>
               </Link>
             </Reveal>
           </div>
         </div>
 
-        <div className="mt-24 grid grid-cols-1 md:grid-cols-3 gap-px bg-rule rounded-3xl overflow-hidden">
+        <div className="mt-24 grid grid-cols-1 md:grid-cols-3 gap-px bg-white/10 rounded-3xl overflow-hidden">
           <InfoBlock
             label="Office"
             content={["63, 6th Floor, Maker Tower \"F\"", "Cuffe Parade, Mumbai 400 005"]}
           />
-          <InfoBlock label="Phone" content={["—"]} />
-          <InfoBlock label="Email" content={["contact@tridentbay.in"]} />
+          <InfoBlock label="Phone" content={["+91 22 6236 6266 / 6277"]} />
+          <InfoBlock label="Email" content={["dhananjay@landmarkcapital.in"]} />
         </div>
       </div>
     </motion.section>
@@ -84,10 +84,10 @@ export function ContactCTA() {
 
 function InfoBlock({ label, content }: { label: string; content: string[] }) {
   return (
-    <div className="p-8 lg:p-10 bg-paper">
+    <div className="p-8 lg:p-10 bg-canvas">
       <p className="text-[10px] uppercase tracking-[0.22em] text-red-500 mb-4">{label}</p>
       {content.map((line, i) => (
-        <p key={i} className="text-sm text-navy-500 leading-relaxed">
+        <p key={i} className="text-sm text-paper leading-relaxed">
           {line}
         </p>
       ))}

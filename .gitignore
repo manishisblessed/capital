@@ -10,3 +10,6 @@ dist-ssr
 .env
 .env.local
 .env.production
+
+# TypeScript build info
+tsconfig.tsbuildinfo

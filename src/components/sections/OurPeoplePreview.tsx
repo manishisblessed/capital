@@ -9,7 +9,7 @@ export function OurPeoplePreview() {
   const featured = [...leadership, ...teamMembers].slice(0, 6);
 
   return (
-    <section className="relative py-32 lg:py-40 bg-paper overflow-hidden">
+    <section className="relative py-32 lg:py-40 bg-canvas overflow-hidden">
       <div className="container-tb">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 mb-20">
           <div className="lg:col-span-7">
@@ -24,7 +24,7 @@ export function OurPeoplePreview() {
           </div>
           <div className="lg:col-span-5 lg:pt-6 flex flex-col gap-6">
             <Reveal delay={0.2}>
-              <p className="text-base lg:text-lg text-ink-soft leading-relaxed">
+              <p className="text-base lg:text-lg text-paper/75 leading-relaxed">
                 The same people who originate, underwrite, structure, and execute. Decades of
                 experience across every cycle of Indian real estate.
               </p>
@@ -32,7 +32,7 @@ export function OurPeoplePreview() {
             <Reveal delay={0.3}>
               <Link
                 to="/our-people"
-                className="inline-flex items-center gap-2 text-sm uppercase tracking-[0.18em] text-navy-500 link-underline self-start"
+                className="inline-flex items-center gap-2 text-sm uppercase tracking-[0.18em] text-paper link-underline self-start"
               >
                 Meet the full team
                 <ArrowUpRight size={16} />
@@ -41,7 +41,7 @@ export function OurPeoplePreview() {
           </div>
         </div>
 
-        <div className="grid grid-cols-2 lg:grid-cols-3 gap-px bg-rule rounded-3xl overflow-hidden">
+        <div className="grid grid-cols-2 lg:grid-cols-3 gap-px bg-white/10 rounded-3xl overflow-hidden">
           {featured.map((member, i) => (
             <TeamPreviewCard key={member.id} member={member} index={i} />
           ))}
@@ -66,20 +66,20 @@ function TeamPreviewCard({
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, amount: 0.1 }}
       transition={{ duration: 0.7, delay: index * 0.05, ease: [0.16, 1, 0.3, 1] }}
-      className="bg-paper p-8 lg:p-10 group hover:bg-cream transition-colors duration-500"
+      className="bg-canvas p-8 lg:p-10 group hover:bg-canvas-2 transition-colors duration-500"
     >
       <div ref={tiltRef} className="relative">
         <Avatar name={member.name} />
         <div className="mt-6 flex items-start justify-between gap-3">
           <div>
-            <h3 className="font-display text-xl text-navy-500">{member.name}</h3>
+            <h3 className="font-display text-xl text-paper">{member.name}</h3>
             <p className="text-[10px] uppercase tracking-[0.22em] text-red-500 mt-1">
               {member.role}
             </p>
           </div>
           <ArrowUpRight
             size={16}
-            className="text-muted transition-transform duration-500 group-hover:rotate-0 -rotate-45 group-hover:text-red-500 mt-1"
+            className="text-paper/50 transition-transform duration-500 group-hover:rotate-0 -rotate-45 group-hover:text-red-500 mt-1"
           />
         </div>
       </div>
@@ -106,7 +106,7 @@ export function Avatar({ name, size = "md" }: { name: string; size?: "sm" | "md"
 
   return (
     <div
-      className={`${sizeClass} rounded-full grid place-items-center font-display text-navy-500 bg-mist border border-navy-500/10 relative overflow-hidden`}
+      className={`${sizeClass} rounded-full grid place-items-center font-display text-paper bg-canvas-3 border border-navy-500/10 relative overflow-hidden`}
     >
       {/* Decorative arch */}
       <svg className="absolute inset-0 opacity-40" viewBox="0 0 80 80" fill="none" aria-hidden>

@@ -26,7 +26,7 @@ export default function Blogs() {
         subtitle="Perspectives on real estate, warehousing, capital markets, and the structural shifts reshaping India's investment landscape."
       />
 
-      <section className="py-20 lg:py-28 bg-paper">
+      <section className="py-20 lg:py-28 bg-canvas">
         <div className="container-tb">
           <div className="space-y-12">
             {blogs.map((blog, i) => (
@@ -39,11 +39,11 @@ export default function Blogs() {
               >
                 <Link
                   to={`/knowledge/blogs/${blog.slug}`}
-                  className="grid grid-cols-1 lg:grid-cols-12 gap-8 group py-10 border-b border-rule"
+                  className="grid grid-cols-1 lg:grid-cols-12 gap-8 group py-10 border-b border-white/10"
                 >
                   {/* Index + meta */}
                   <div className="lg:col-span-2 flex items-start gap-3">
-                    <span className="font-mono text-xs text-muted tabular-nums">
+                    <span className="font-mono text-xs text-paper/50 tabular-nums">
                       {String(i + 1).padStart(2, "0")}
                     </span>
                     {blog.category && (
@@ -55,10 +55,10 @@ export default function Blogs() {
 
                   {/* Title + excerpt */}
                   <div className="lg:col-span-7">
-                    <h2 className="display-3 text-navy-500 group-hover:text-red-500 transition-colors duration-500 text-balance">
+                    <h2 className="display-3 text-paper group-hover:text-red-500 transition-colors duration-500 text-balance">
                       {blog.title}
                     </h2>
-                    <p className="mt-4 text-base text-ink-soft leading-relaxed max-w-2xl line-clamp-3">
+                    <p className="mt-4 text-base text-paper/75 leading-relaxed max-w-2xl line-clamp-3">
                       {blog.excerpt}
                     </p>
                   </div>
@@ -66,10 +66,10 @@ export default function Blogs() {
                   {/* Author + date */}
                   <div className="lg:col-span-3 flex flex-col gap-3 lg:items-end justify-between">
                     <div className="lg:text-right">
-                      <p className="text-sm font-medium text-navy-500">{blog.author}</p>
-                      <p className="text-xs text-muted mt-1">{formatDate(blog.date)}</p>
+                      <p className="text-sm font-medium text-paper">{blog.author}</p>
+                      <p className="text-xs text-paper/50 mt-1">{formatDate(blog.date)}</p>
                     </div>
-                    <span className="inline-flex items-center gap-1 text-xs uppercase tracking-[0.18em] text-navy-500 group-hover:text-red-500 transition-colors">
+                    <span className="inline-flex items-center gap-1 text-xs uppercase tracking-[0.18em] text-paper group-hover:text-red-500 transition-colors">
                       Read
                       <ArrowUpRight size={14} className="transition-transform duration-500 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
                     </span>

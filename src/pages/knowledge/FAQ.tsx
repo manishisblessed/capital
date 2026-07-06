@@ -21,9 +21,9 @@ export default function FAQ() {
         subtitle="Common questions about investing in our funds, drawdowns, reporting, and the investor lifecycle."
       />
 
-      <section className="py-20 lg:py-28 bg-paper">
+      <section className="py-20 lg:py-28 bg-canvas">
         <div className="container-narrow">
-          <ul className="divide-y divide-rule border-y border-rule">
+          <ul className="divide-y divide-white/10 border-y border-white/10">
             {faqs.map((faq, i) => (
               <li key={faq.question}>
                 <Reveal delay={i * 0.04}>
@@ -32,15 +32,15 @@ export default function FAQ() {
                     className="w-full flex items-start gap-6 py-8 lg:py-10 text-left group"
                     aria-expanded={open === i}
                   >
-                    <span className="font-mono text-xs text-muted tabular-nums pt-2 shrink-0">
+                    <span className="font-mono text-xs text-paper/50 tabular-nums pt-2 shrink-0">
                       {String(i + 1).padStart(2, "0")}
                     </span>
-                    <span className="flex-1 font-display text-2xl lg:text-3xl text-navy-500 group-hover:text-red-500 transition-colors duration-500 text-balance">
+                    <span className="flex-1 font-display text-2xl lg:text-3xl text-paper group-hover:text-red-500 transition-colors duration-500 text-balance">
                       {faq.question}
                     </span>
                     <span
                       className={`shrink-0 mt-2 w-10 h-10 rounded-full grid place-items-center transition-all duration-500 ${
-                        open === i ? "bg-red-500 text-paper rotate-180" : "bg-mist text-navy-500"
+                        open === i ? "bg-red-500 text-paper rotate-180" : "bg-canvas-3 text-paper"
                       }`}
                     >
                       {open === i ? <Minus size={16} /> : <Plus size={16} />}
@@ -57,7 +57,7 @@ export default function FAQ() {
                       className="overflow-hidden"
                     >
                       <div className="pl-12 pr-16 pb-10 lg:pb-12">
-                        <p className="text-base lg:text-lg leading-relaxed text-ink-soft max-w-2xl">
+                        <p className="text-base lg:text-lg leading-relaxed text-paper/75 max-w-2xl">
                           {faq.answer}
                         </p>
                       </div>

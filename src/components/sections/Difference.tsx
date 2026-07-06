@@ -70,14 +70,14 @@ export function Difference() {
   const railHeight = useTransform(scrollYProgress, [0, 1], ["0%", "100%"]);
 
   return (
-    <section ref={ref} className="relative py-32 lg:py-40 bg-cream overflow-hidden">
+    <section ref={ref} className="relative py-32 lg:py-40 bg-canvas-2 overflow-hidden">
       <div className="container-tb">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 mb-20">
           <div className="lg:col-span-5">
             <Reveal>
               <p className="eyebrow mb-6">The Difference</p>
               <h2 className="display-2 text-balance">
-                The <span className="italic font-light">TridentBay</span>
+                The <span className="italic font-light">Landmark</span>
                 <br />
                 way of working.
               </h2>
@@ -85,7 +85,7 @@ export function Difference() {
           </div>
           <div className="lg:col-span-7 lg:pt-6 flex items-end">
             <Reveal delay={0.2}>
-              <p className="text-lg text-ink-soft leading-relaxed max-w-2xl">
+              <p className="text-lg text-paper/75 leading-relaxed max-w-2xl">
                 Six principles that shape every decision — from how we source deals to how we
                 report on them.
               </p>
@@ -96,7 +96,7 @@ export function Difference() {
         {/* Interactive list view */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-16 relative">
           {/* Vertical scroll-progress rail (left) */}
-          <div className="hidden lg:block absolute left-0 top-0 bottom-0 w-px bg-rule pointer-events-none">
+          <div className="hidden lg:block absolute left-0 top-0 bottom-0 w-px bg-white/10 pointer-events-none">
             <motion.div
               style={{ height: railHeight }}
               className="w-px bg-red-500 origin-top"
@@ -109,8 +109,8 @@ export function Difference() {
               <li key={d.title}>
                 <button
                   onClick={() => setActive(i)}
-                  className={`group w-full flex items-start gap-6 py-7 border-b border-rule text-left transition-colors duration-500 ${
-                    active === i ? "text-navy-500" : "text-muted hover:text-navy-500"
+                  className={`group w-full flex items-start gap-6 py-7 border-b border-white/10 text-left transition-colors duration-500 ${
+                    active === i ? "text-paper" : "text-paper/50 hover:text-paper"
                   }`}
                 >
                   <span
@@ -126,7 +126,7 @@ export function Difference() {
                   <ArrowUpRight
                     size={20}
                     className={`mt-3 transition-all duration-500 ${
-                      active === i ? "rotate-0 text-red-500" : "-rotate-45 text-muted"
+                      active === i ? "rotate-0 text-red-500" : "-rotate-45 text-paper/50"
                     }`}
                   />
                 </button>
@@ -145,9 +145,9 @@ export function Difference() {
                   exit={{ opacity: 0, y: -8, rotateX: -4 }}
                   transition={{ duration: 0.55, ease: [0.16, 1, 0.3, 1] }}
                   style={{ transformPerspective: 1200 }}
-                  className="bg-paper rounded-3xl p-10 lg:p-12 border border-rule shadow-[0_30px_80px_-30px_rgba(4,3,107,0.15)]"
+                  className="bg-canvas rounded-3xl p-10 lg:p-12 border border-white/10 shadow-[0_30px_80px_-30px_rgba(0,0,0,0.7)]"
                 >
-                  <p className="text-2xl lg:text-3xl font-display italic text-navy-500 leading-tight text-balance">
+                  <p className="text-2xl lg:text-3xl font-display italic text-paper leading-tight text-balance">
                     "{differences[active].subtitle}"
                   </p>
                   <div className="rule my-10" />
@@ -155,7 +155,7 @@ export function Difference() {
                     {differences[active].points.map((point) => (
                       <li key={point} className="flex items-start gap-4">
                         <span className="text-red-500 mt-2 shrink-0">—</span>
-                        <span className="text-base lg:text-lg text-ink-soft leading-relaxed">
+                        <span className="text-base lg:text-lg text-paper/75 leading-relaxed">
                           {point}
                         </span>
                       </li>

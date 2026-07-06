@@ -64,7 +64,7 @@ export function HorizontalDeals() {
   return (
     <section
       ref={sectionRef}
-      className="relative bg-paper overflow-hidden lg:h-[100svh]"
+      className="relative bg-canvas overflow-hidden lg:h-[100svh]"
       aria-label="Selective deals completed"
     >
       {/* Header (visible on first frame of pin) */}
@@ -79,7 +79,7 @@ export function HorizontalDeals() {
             </h3>
           </Reveal>
           <Reveal delay={0.15}>
-            <p className="text-xs uppercase tracking-[0.22em] text-muted max-w-sm hidden lg:block">
+            <p className="text-xs uppercase tracking-[0.22em] text-paper/50 max-w-sm hidden lg:block">
               Scroll to traverse. {completedDeals.length} representative exits across asset classes & cities.
             </p>
           </Reveal>
@@ -102,14 +102,14 @@ export function HorizontalDeals() {
 
       {/* Progress rail */}
       <div className="hidden lg:flex absolute bottom-10 left-24 right-24 items-center gap-6 z-10">
-        <span className="text-[10px] uppercase tracking-[0.32em] text-muted">Scroll</span>
-        <div className="flex-1 h-px bg-rule relative overflow-hidden">
+        <span className="text-[10px] uppercase tracking-[0.32em] text-paper/50">Scroll</span>
+        <div className="flex-1 h-px bg-white/10 relative overflow-hidden">
           <div
             ref={progressRef}
             className="absolute inset-0 bg-red-500 origin-left scale-x-0"
           />
         </div>
-        <span className="text-[10px] uppercase tracking-[0.32em] text-muted">End</span>
+        <span className="text-[10px] uppercase tracking-[0.32em] text-paper/50">End</span>
       </div>
     </section>
   );
@@ -134,11 +134,11 @@ function DealCard({
     >
       <div
         ref={tiltRef}
-        className="relative h-[440px] lg:h-[500px] p-10 lg:p-12 rounded-3xl border border-rule bg-cream overflow-hidden flex flex-col justify-between"
+        className="relative h-[440px] lg:h-[500px] p-10 lg:p-12 rounded-3xl border border-white/10 bg-canvas-2 overflow-hidden flex flex-col justify-between"
       >
         {/* Background numeral */}
         <span
-          className="absolute -bottom-12 -right-6 font-display font-light text-[14rem] leading-none text-navy-500/[0.04] select-none pointer-events-none"
+          className="absolute -bottom-12 -right-6 font-display font-light text-[14rem] leading-none text-paper/[0.06] select-none pointer-events-none"
           aria-hidden
         >
           {String(index + 1).padStart(2, "0")}
@@ -172,25 +172,25 @@ function DealCard({
             <span className="text-[10px] uppercase tracking-[0.28em] text-red-500">
               {deal.category}
             </span>
-            <span className="h-px w-8 bg-rule" />
-            <span className="text-[10px] uppercase tracking-[0.22em] text-muted">
+            <span className="h-px w-8 bg-white/10" />
+            <span className="text-[10px] uppercase tracking-[0.22em] text-paper/50">
               {deal.city}
             </span>
           </div>
-          <h4 className="font-display text-4xl lg:text-5xl text-navy-500 leading-[1.05] mb-2">
+          <h4 className="font-display text-4xl lg:text-5xl text-paper leading-[1.05] mb-2">
             {deal.name}
           </h4>
         </div>
 
-        <div className="relative grid grid-cols-2 gap-6 pt-8 border-t border-rule">
+        <div className="relative grid grid-cols-2 gap-6 pt-8 border-t border-white/10">
           <div>
-            <p className="text-[10px] uppercase tracking-[0.18em] text-muted mb-2">
+            <p className="text-[10px] uppercase tracking-[0.18em] text-paper/50 mb-2">
               Investment
             </p>
-            <p className="font-display text-2xl text-navy-500">{deal.investment}</p>
+            <p className="font-display text-2xl text-paper">{deal.investment}</p>
           </div>
           <div>
-            <p className="text-[10px] uppercase tracking-[0.18em] text-muted mb-2">
+            <p className="text-[10px] uppercase tracking-[0.18em] text-paper/50 mb-2">
               Exit IRR
             </p>
             <p className="font-display text-2xl text-red-500">{deal.exitIRR}</p>

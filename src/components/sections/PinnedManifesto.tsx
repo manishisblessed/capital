@@ -35,16 +35,16 @@ export function PinnedManifesto() {
   return (
     <section
       ref={ref}
-      className="relative min-h-[100svh] flex items-center py-24 bg-paper overflow-hidden noise-overlay"
+      className="relative min-h-[100svh] flex items-center py-24 bg-canvas overflow-hidden noise-overlay"
     >
-      {/* Soft red wash that breathes in / out with scroll */}
+      {/* Ambient wash that breathes in / out with scroll */}
       <motion.div
         style={{ opacity: bgOpacity }}
         className="absolute inset-0 pointer-events-none"
         aria-hidden
       >
-        <div className="absolute -top-40 -left-40 w-[60vw] h-[60vw] rounded-full bg-red-100/60 blur-[100px]" />
-        <div className="absolute -bottom-40 -right-40 w-[50vw] h-[50vw] rounded-full bg-navy-500/[0.06] blur-[120px]" />
+        <div className="absolute -top-40 -left-40 w-[60vw] h-[60vw] rounded-full bg-red-500/[0.10] blur-[100px]" />
+        <div className="absolute -bottom-40 -right-40 w-[50vw] h-[50vw] rounded-full bg-navy-400/[0.18] blur-[120px]" />
       </motion.div>
 
       <div className="container-tb relative z-10">
@@ -53,7 +53,7 @@ export function PinnedManifesto() {
           Our Discipline
         </p>
 
-        <h2 className="display-1 text-balance text-navy-500/15 leading-[1.05] tracking-tight max-w-[1100px]">
+        <h2 className="display-1 text-balance text-paper/15 leading-[1.05] tracking-tight max-w-[1100px]">
           {WORDS.map((word, i) => (
             <Word
               key={i}
@@ -92,13 +92,13 @@ function Word({
   const color = useTransform(
     scrollYProgress,
     [start, end],
-    ["rgba(4, 3, 107, 0.4)", "rgba(4, 3, 107, 1)"]
+    ["rgba(250, 250, 247, 0.25)", "rgba(250, 250, 247, 1)"]
   );
   const isAccent = word.endsWith("outcomes —") || word.endsWith("time.");
   const accentColor = useTransform(
     scrollYProgress,
     [start, end],
-    ["rgba(4, 3, 107, 0.4)", "rgba(187, 28, 28, 1)"]
+    ["rgba(250, 250, 247, 0.25)", "rgba(236, 89, 89, 1)"]
   );
 
   return (

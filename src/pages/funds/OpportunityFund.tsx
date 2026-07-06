@@ -26,14 +26,14 @@ export default function OpportunityFund() {
           <span className="px-4 py-1.5 rounded-full bg-navy-500 text-paper text-[10px] uppercase tracking-[0.2em]">
             Closed
           </span>
-          <span className="px-4 py-1.5 rounded-full bg-navy-500/10 text-navy-500 text-[10px] uppercase tracking-[0.2em] font-mono">
+          <span className="px-4 py-1.5 rounded-full bg-white/5 text-paper text-[10px] uppercase tracking-[0.2em] font-mono">
             IN/AIF2/13-14/0068
           </span>
         </div>
       </PageHero>
 
       {/* Legal structure */}
-      <section className="py-28 lg:py-36 bg-cream">
+      <section className="py-28 lg:py-36 bg-canvas-2">
         <div className="container-tb">
           <div className="grid lg:grid-cols-12 gap-12">
             <div className="lg:col-span-4">
@@ -46,14 +46,14 @@ export default function OpportunityFund() {
             </div>
             <div className="lg:col-span-8">
               <Reveal delay={0.15}>
-                <div className="bg-paper border border-rule rounded-3xl p-10 lg:p-14">
-                  <p className="text-base lg:text-lg leading-relaxed text-ink-soft">
+                <div className="bg-canvas border border-white/10 rounded-3xl p-10 lg:p-14">
+                  <p className="text-base lg:text-lg leading-relaxed text-paper/75">
                     The fund is a scheme floated by the trust, set up under the Indian Trust Act,
                     1882 and registered with the Securities and Exchange Board of India (SEBI)
                     under the Alternative Investment Funds Regulations, 2012 as a{" "}
-                    <span className="text-navy-500 font-medium">Category II Alternative Investment Fund</span>.
+                    <span className="text-paper font-medium">Category II Alternative Investment Fund</span>.
                   </p>
-                  <p className="text-base lg:text-lg leading-relaxed text-ink-soft mt-6">
+                  <p className="text-base lg:text-lg leading-relaxed text-paper/75 mt-6">
                     IL&FS Trust Company Limited shall act as the Trustee to the Fund.
                   </p>
                 </div>
@@ -64,7 +64,7 @@ export default function OpportunityFund() {
       </section>
 
       {/* Fund highlights */}
-      <section className="py-28 lg:py-36 bg-paper">
+      <section className="py-28 lg:py-36 bg-canvas">
         <div className="container-tb">
           <Reveal>
             <p className="eyebrow mb-6">Fund Highlights</p>
@@ -73,7 +73,7 @@ export default function OpportunityFund() {
             </h2>
           </Reveal>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-px bg-rule rounded-3xl overflow-hidden">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-px bg-white/10 rounded-3xl overflow-hidden">
             {highlights.map((h, i) => (
               <motion.div
                 key={h.label}
@@ -81,15 +81,15 @@ export default function OpportunityFund() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.7, delay: i * 0.08, ease: [0.16, 1, 0.3, 1] }}
-                className="bg-paper p-10 lg:p-12"
+                className="bg-canvas p-10 lg:p-12"
               >
                 <p className="text-[10px] uppercase tracking-[0.22em] text-red-500 mb-6">
                   {h.label}
                 </p>
-                <p className="font-display text-4xl lg:text-5xl text-navy-500 mb-4 leading-none">
+                <p className="font-display text-4xl lg:text-5xl text-paper mb-4 leading-none">
                   {h.value}
                 </p>
-                <p className="text-xs text-muted leading-relaxed">{h.note}</p>
+                <p className="text-xs text-paper/50 leading-relaxed">{h.note}</p>
               </motion.div>
             ))}
           </div>

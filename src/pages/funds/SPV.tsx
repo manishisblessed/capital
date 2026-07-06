@@ -49,7 +49,7 @@ const routes = [
     bullets: [
       "SEBI-regulated pathway for Accredited Investors, UHNIs, Multi-Family Offices, and global capital",
       "Investments made through an SPV",
-      "Equity positions taken by TridentBay in each structure",
+      "Equity positions taken by Landmark Capital in each structure",
       "Large Ticket Size > ₹25 Cr",
       "Tenure 3 to 4 years",
       "Suitable for HNIs, Family Offices, Institutions",
@@ -91,11 +91,11 @@ export default function SPV() {
             <span className="italic font-light block">never blind pools.</span>
           </>
         }
-        subtitle="TridentBay operates a deal-by-deal, client-aligned investment model that empowers sophisticated investors to select opportunities precisely matching their risk profile, return expectations, liquidity requirements, and thematic preferences."
+        subtitle="Landmark Capital operates a deal-by-deal, client-aligned investment model that empowers sophisticated investors to select opportunities precisely matching their risk profile, return expectations, liquidity requirements, and thematic preferences."
       />
 
       {/* Three routes */}
-      <section className="py-28 lg:py-36 bg-paper">
+      <section className="py-28 lg:py-36 bg-canvas">
         <div className="container-tb">
           <Reveal>
             <p className="eyebrow mb-6">Three Routes To Participate</p>
@@ -114,17 +114,17 @@ export default function SPV() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, amount: 0.15 }}
                 transition={{ duration: 0.8, delay: i * 0.12, ease: [0.16, 1, 0.3, 1] }}
-                className="group flex flex-col p-10 bg-cream rounded-3xl border border-rule hover:border-red-500/40 hover:bg-paper transition-all duration-500 relative overflow-hidden"
+                className="group flex flex-col p-10 bg-canvas-2 rounded-3xl border border-white/10 hover:border-red-500/40 hover:bg-canvas transition-all duration-500 relative overflow-hidden"
               >
                 <span className="text-[10px] uppercase tracking-[0.22em] text-red-500 mb-6">
                   {r.chip}
                 </span>
-                <h3 className="font-display text-3xl text-navy-500 mb-6">{r.title}</h3>
-                <p className="text-sm text-ink-soft leading-relaxed mb-8">{r.body}</p>
+                <h3 className="font-display text-3xl text-paper mb-6">{r.title}</h3>
+                <p className="text-sm text-paper/75 leading-relaxed mb-8">{r.body}</p>
                 <div className="rule mb-6" />
                 <ul className="space-y-3 mt-auto">
                   {r.bullets.map((b) => (
-                    <li key={b} className="flex items-start gap-3 text-sm text-ink-soft">
+                    <li key={b} className="flex items-start gap-3 text-sm text-paper/75">
                       <span className="text-red-500 mt-1 shrink-0">→</span>
                       <span>{b}</span>
                     </li>

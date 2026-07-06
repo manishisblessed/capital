@@ -4,7 +4,7 @@ import { ArrowUpRight, ArrowLeft } from "lucide-react";
 
 export default function NotFound() {
   return (
-    <section className="min-h-[100svh] grid place-items-center bg-paper px-6 noise-overlay relative overflow-hidden">
+    <section className="min-h-[100svh] grid place-items-center bg-canvas px-6 noise-overlay relative overflow-hidden">
       <div className="absolute inset-0 grid-backdrop opacity-50" />
       <div className="relative text-center max-w-xl mx-auto">
         <motion.p
@@ -27,7 +27,7 @@ export default function NotFound() {
           initial={{ opacity: 0, y: 12 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7, delay: 0.3 }}
-          className="mt-6 text-lg text-ink-soft text-balance"
+          className="mt-6 text-lg text-paper/75 text-balance"
         >
           The page you're looking for doesn't exist — but the right opportunities do.
         </motion.p>
@@ -46,7 +46,7 @@ export default function NotFound() {
           </Link>
           <Link
             to="/our-business"
-            className="group inline-flex items-center gap-2 h-14 px-2 text-sm uppercase tracking-[0.18em] text-navy-500 link-underline"
+            className="group inline-flex items-center gap-2 h-14 px-2 text-sm uppercase tracking-[0.18em] text-paper link-underline"
           >
             Explore our business
             <ArrowUpRight size={16} />

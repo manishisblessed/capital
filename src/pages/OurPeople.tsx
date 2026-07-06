@@ -20,7 +20,7 @@ export default function OurPeople() {
       />
 
       {/* Leadership */}
-      <section className="py-28 lg:py-36 bg-paper">
+      <section className="py-28 lg:py-36 bg-canvas">
         <div className="container-tb">
           <Reveal>
             <p className="eyebrow mb-6">Leadership</p>
@@ -37,7 +37,7 @@ export default function OurPeople() {
       </section>
 
       {/* Team */}
-      <section className="py-28 lg:py-36 bg-cream">
+      <section className="py-28 lg:py-36 bg-canvas-2">
         <div className="container-tb">
           <Reveal>
             <p className="eyebrow mb-6">The Team</p>
@@ -71,12 +71,12 @@ function TeamCard({
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, amount: 0.1 }}
       transition={{ duration: 0.8, delay: index * 0.08, ease: [0.16, 1, 0.3, 1] }}
-      className="group p-8 lg:p-10 bg-paper border border-rule rounded-3xl hover:border-red-500/30 hover:shadow-[0_30px_60px_-30px_rgba(4,3,107,0.15)] transition-all duration-700"
+      className="group p-8 lg:p-10 bg-canvas border border-white/10 rounded-3xl hover:border-red-500/30 hover:shadow-[0_30px_60px_-30px_rgba(0,0,0,0.6)] transition-all duration-700"
     >
       <div className="flex items-start gap-6 mb-6">
         <Avatar name={member.name} size={compact ? "md" : "lg"} />
         <div className="flex-1 pt-2">
-          <h3 className="font-display text-2xl lg:text-3xl text-navy-500">{member.name}</h3>
+          <h3 className="font-display text-2xl lg:text-3xl text-paper">{member.name}</h3>
           <p className="text-[10px] uppercase tracking-[0.22em] text-red-500 mt-2">
             {member.role}
           </p>
@@ -85,7 +85,7 @@ function TeamCard({
               href={member.linkedin}
               target="_blank"
               rel="noreferrer noopener"
-              className="inline-flex items-center gap-1.5 mt-3 text-xs text-muted hover:text-red-500 transition-colors"
+              className="inline-flex items-center gap-1.5 mt-3 text-xs text-paper/50 hover:text-red-500 transition-colors"
               aria-label={`${member.name} on LinkedIn`}
             >
               <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor">
@@ -101,7 +101,7 @@ function TeamCard({
 
       <ul className="space-y-3">
         {member.bio.map((line) => (
-          <li key={line} className="flex items-start gap-3 text-sm leading-relaxed text-ink-soft">
+          <li key={line} className="flex items-start gap-3 text-sm leading-relaxed text-paper/75">
             <span className="text-red-500 mt-1.5 shrink-0">→</span>
             <span>{line}</span>
           </li>
@@ -109,7 +109,7 @@ function TeamCard({
       </ul>
 
       {member.credentials && (
-        <p className="mt-6 pt-6 border-t border-rule text-xs uppercase tracking-[0.18em] text-navy-500 font-medium">
+        <p className="mt-6 pt-6 border-t border-white/10 text-xs uppercase tracking-[0.18em] text-paper font-medium">
           {member.credentials}
         </p>
       )}

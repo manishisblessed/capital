@@ -26,10 +26,10 @@ const FAQ = lazy(() => import("@/pages/knowledge/FAQ"));
 
 function PageFallback() {
   return (
-    <div className="min-h-[100svh] grid place-items-center bg-paper">
+    <div className="min-h-[100svh] grid place-items-center bg-canvas">
       <div className="flex flex-col items-center gap-4">
-        <div className="w-10 h-10 rounded-full border-2 border-rule border-t-red-500 animate-spin" />
-        <p className="text-xs uppercase tracking-[0.22em] text-muted">Loading</p>
+        <div className="w-10 h-10 rounded-full border-2 border-white/10 border-t-red-500 animate-spin" />
+        <p className="text-xs uppercase tracking-[0.22em] text-paper/50">Loading</p>
       </div>
     </div>
   );

@@ -41,7 +41,7 @@ export default function Contact() {
         subtitle="Reach out about investment opportunities, fund participation, or strategic partnerships."
       />
 
-      <section className="py-20 lg:py-28 bg-paper">
+      <section className="py-20 lg:py-28 bg-canvas">
         <div className="container-tb">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-20">
             {/* Form */}
@@ -106,7 +106,7 @@ export default function Contact() {
             {/* Info */}
             <div className="lg:col-span-5">
               <Reveal delay={0.15}>
-                <div className="bg-cream rounded-3xl p-10 lg:p-12">
+                <div className="bg-canvas-2 rounded-3xl p-10 lg:p-12">
                   <p className="eyebrow mb-6">Office</p>
                   <div className="space-y-8">
                     <InfoItem icon={<MapPin size={18} />} label="Location">
@@ -118,12 +118,12 @@ export default function Contact() {
                     </InfoItem>
 
                     <InfoItem icon={<Phone size={18} />} label="Phone">
-                      —
+                      +91 22 6236 6266 / 6277
                     </InfoItem>
 
                     <InfoItem icon={<Mail size={18} />} label="Email">
-                      <a href="mailto:contact@tridentbay.in" className="hover:text-red-500 transition-colors">
-                        contact@tridentbay.in
+                      <a href="mailto:dhananjay@landmarkcapital.in" className="hover:text-red-500 transition-colors">
+                        dhananjay@landmarkcapital.in
                       </a>
                     </InfoItem>
                   </div>
@@ -135,12 +135,12 @@ export default function Contact() {
       </section>
 
       {/* Map */}
-      <section className="bg-paper pb-24">
+      <section className="bg-canvas pb-24">
         <div className="container-tb">
           <Reveal>
-            <div className="overflow-hidden rounded-3xl border border-rule">
+            <div className="overflow-hidden rounded-3xl border border-white/10">
               <iframe
-                title="TridentBay office on Google Maps"
+                title="Landmark Capital office on Google Maps"
                 src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3773.7068814076244!2d72.81616367507671!3d18.910856482244456!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3be7d1c5a8e8a5e9%3A0x5b5b5b5b5b5b5b5b!2sMaker%20Tower%20F%2C%20Cuffe%20Parade%2C%20Mumbai!5e0!3m2!1sen!2sin!4v1700000000000"
                 width="100%"
                 height="460"
@@ -182,7 +182,7 @@ function Field({
     onBlur: () => setFocused(false),
     required,
     className:
-      "w-full bg-transparent border-0 border-b border-rule pt-7 pb-3 text-base text-navy-500 outline-none transition-colors focus:border-red-500 placeholder-transparent resize-none",
+      "w-full bg-transparent border-0 border-b border-white/10 pt-7 pb-3 text-base text-paper outline-none transition-colors focus:border-red-500 placeholder-transparent resize-none",
   };
 
   return (
@@ -191,7 +191,7 @@ function Field({
         className={`absolute left-0 transition-all duration-300 pointer-events-none ${
           float
             ? "top-1 text-[10px] uppercase tracking-[0.22em] text-red-500"
-            : "top-7 text-base text-muted"
+            : "top-7 text-base text-paper/50"
         }`}
       >
         {label}
@@ -216,12 +216,12 @@ function InfoItem({
 }) {
   return (
     <div className="flex items-start gap-4">
-      <div className="w-10 h-10 rounded-full bg-paper border border-rule grid place-items-center text-red-500 shrink-0">
+      <div className="w-10 h-10 rounded-full bg-canvas border border-white/10 grid place-items-center text-red-500 shrink-0">
         {icon}
       </div>
       <div>
-        <p className="text-[10px] uppercase tracking-[0.22em] text-muted mb-1">{label}</p>
-        <div className="text-base text-navy-500 leading-relaxed">{children}</div>
+        <p className="text-[10px] uppercase tracking-[0.22em] text-paper/50 mb-1">{label}</p>
+        <div className="text-base text-paper leading-relaxed">{children}</div>
       </div>
     </div>
   );

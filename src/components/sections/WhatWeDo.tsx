@@ -66,7 +66,7 @@ export function WhatWeDo() {
           <div className="lg:col-span-7 lg:pt-6">
             <Reveal delay={0.2}>
               <p className="text-lg leading-relaxed text-paper/80 max-w-2xl">
-                TridentBay originates and structures select real estate opportunities with a
+                Landmark Capital originates and structures select real estate opportunities with a
                 singular focus on investor alignment and long-term value creation rather than
                 predefined fund constraints. Each investment is independently underwritten and
                 presented on its own merits, with an emphasis on institutional discipline, robust

@@ -39,11 +39,11 @@ export function Navbar() {
         transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1], delay: 0.1 }}
         className={cn(
           "fixed top-0 left-0 right-0 z-50 transition-all duration-500",
-          scrolled ? "glass border-b border-rule" : "bg-transparent"
+          scrolled ? "glass border-b border-white/10" : "bg-transparent"
         )}
       >
         <div className="container-tb flex items-center justify-between h-[72px]">
-          <Link to="/" className="z-10" aria-label="TridentBay home">
+          <Link to="/" className="z-10" aria-label="Landmark Capital home">
             <Logo />
           </Link>
 
@@ -62,7 +62,7 @@ export function Navbar() {
                   className={({ isActive }) =>
                     cn(
                       "px-4 py-2 text-[13px] tracking-wider uppercase transition-colors duration-300 relative",
-                      isActive ? "text-red-500" : "text-navy-500 hover:text-red-500"
+                      isActive ? "text-red-500" : "text-paper hover:text-red-500"
                     )
                   }
                 >
@@ -78,12 +78,12 @@ export function Navbar() {
                       transition={{ duration: 0.25, ease: [0.16, 1, 0.3, 1] }}
                       className="absolute top-full left-1/2 -translate-x-1/2 pt-2 min-w-[240px]"
                     >
-                      <div className="bg-paper border border-rule shadow-[0_30px_60px_-20px_rgba(4,3,107,0.18)] rounded-2xl p-2">
+                      <div className="bg-canvas border border-white/10 shadow-[0_30px_60px_-20px_rgba(0,0,0,0.7)] rounded-2xl p-2">
                         {item.children.map((child) => (
                           <Link
                             key={child.to}
                             to={child.to}
-                            className="block px-4 py-3 text-sm text-navy-500 hover:bg-mist hover:text-red-500 rounded-xl transition-colors"
+                            className="block px-4 py-3 text-sm text-paper hover:bg-canvas-3 hover:text-red-500 rounded-xl transition-colors"
                           >
                             {child.label}
                           </Link>
@@ -106,13 +106,13 @@ export function Navbar() {
             <span className="sr-only">Menu</span>
             <span
               className={cn(
-                "absolute h-[1.5px] w-6 bg-navy-500 transition-transform duration-500 ease-out",
+                "absolute h-[1.5px] w-6 bg-paper transition-transform duration-500 ease-out",
                 open ? "rotate-45" : "-translate-y-[5px]"
               )}
             />
             <span
               className={cn(
-                "absolute h-[1.5px] w-6 bg-navy-500 transition-transform duration-500 ease-out",
+                "absolute h-[1.5px] w-6 bg-paper transition-transform duration-500 ease-out",
                 open ? "-rotate-45" : "translate-y-[5px]"
               )}
             />
@@ -128,7 +128,7 @@ export function Navbar() {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.4 }}
-            className="lg:hidden fixed inset-0 z-40 bg-paper"
+            className="lg:hidden fixed inset-0 z-40 bg-canvas"
           >
             <div className="h-full flex flex-col pt-[100px] container-tb overflow-y-auto pb-12">
               <ul className="flex flex-col gap-1">
@@ -138,11 +138,11 @@ export function Navbar() {
                     initial={{ opacity: 0, y: 18 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ delay: 0.05 + i * 0.06, ease: [0.16, 1, 0.3, 1] }}
-                    className="border-b border-rule"
+                    className="border-b border-white/10"
                   >
                     <Link
                       to={item.to}
-                      className="block py-5 display-3 text-navy-500"
+                      className="block py-5 display-3 text-paper"
                     >
                       {item.label}
                     </Link>
@@ -152,7 +152,7 @@ export function Navbar() {
                           <Link
                             key={child.to}
                             to={child.to}
-                            className="text-sm text-muted py-2"
+                            className="text-sm text-paper/50 py-2"
                           >
                             — {child.label}
                           </Link>

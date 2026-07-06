@@ -10,9 +10,9 @@ export type Blog = {
 
 export const blogs: Blog[] = [
   {
-    slug: "tridentbay-aligns-with-india-real-estate",
+    slug: "landmark-aligns-with-india-real-estate",
     title:
-      "How TridentBay Aligns With India's Evolving Real Estate and Investment Landscape",
+      "How Landmark Capital Aligns With India's Evolving Real Estate and Investment Landscape",
     excerpt:
       "India's real estate sector has entered a phase of institutionalization, professional asset management, and yield-focused investing. Regulatory reforms, growing transparency, and the rise of long-term capital have shifted the market away from fragmented development toward professionally managed real estate assets.",
     author: "Ashish Joshi",

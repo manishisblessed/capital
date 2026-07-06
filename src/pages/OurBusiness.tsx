@@ -99,7 +99,7 @@ export default function OurBusiness() {
       />
 
       {/* Investment Principles */}
-      <section className="py-28 lg:py-36 bg-paper">
+      <section className="py-28 lg:py-36 bg-canvas">
         <div className="container-tb">
           <div className="grid lg:grid-cols-12 gap-12 mb-16">
             <div className="lg:col-span-5">
@@ -113,7 +113,7 @@ export default function OurBusiness() {
               </Reveal>
             </div>
           </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-px bg-rule rounded-3xl overflow-hidden">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-px bg-white/10 rounded-3xl overflow-hidden">
             {principles.map((p, i) => (
               <motion.div
                 key={p.title}
@@ -121,11 +121,11 @@ export default function OurBusiness() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.7, delay: i * 0.08, ease: [0.16, 1, 0.3, 1] }}
-                className="bg-paper p-10 lg:p-12 hover:bg-cream transition-colors duration-500"
+                className="bg-canvas p-10 lg:p-12 hover:bg-canvas-2 transition-colors duration-500"
               >
                 <span className="font-display text-5xl text-red-500/30">0{i + 1}</span>
-                <h3 className="font-display text-2xl text-navy-500 mt-4 mb-4">{p.title}</h3>
-                <p className="text-base leading-relaxed text-ink-soft max-w-md">{p.body}</p>
+                <h3 className="font-display text-2xl text-paper mt-4 mb-4">{p.title}</h3>
+                <p className="text-base leading-relaxed text-paper/75 max-w-md">{p.body}</p>
               </motion.div>
             ))}
           </div>
@@ -133,10 +133,10 @@ export default function OurBusiness() {
       </section>
 
       {/* Capabilities */}
-      <section className="py-28 lg:py-36 bg-cream">
+      <section className="py-28 lg:py-36 bg-canvas-2">
         <div className="container-tb">
           <Reveal>
-            <p className="eyebrow mb-6">About TridentBay</p>
+            <p className="eyebrow mb-6">About Landmark</p>
             <h2 className="display-2 mb-16 text-balance">
               Six things <span className="italic font-light">we do well.</span>
             </h2>
@@ -150,15 +150,15 @@ export default function OurBusiness() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.7, delay: i * 0.06, ease: [0.16, 1, 0.3, 1] }}
-                className="p-8 bg-paper border border-rule rounded-3xl hover:border-red-500/30 transition-all duration-500 group"
+                className="p-8 bg-canvas border border-white/10 rounded-3xl hover:border-red-500/30 transition-all duration-500 group"
               >
-                <div className="w-12 h-12 rounded-full bg-red-50 grid place-items-center mb-6 group-hover:bg-red-500 transition-colors">
-                  <span className="font-display text-lg text-red-500 group-hover:text-paper transition-colors">
+                <div className="w-12 h-12 rounded-full bg-red-500/15 grid place-items-center mb-6 group-hover:bg-red-500 transition-colors">
+                  <span className="font-display text-lg text-red-300 group-hover:text-paper transition-colors">
                     {i + 1}
                   </span>
                 </div>
-                <h3 className="font-display text-xl text-navy-500 mb-3">{c.title}</h3>
-                <p className="text-sm text-ink-soft leading-relaxed">{c.body}</p>
+                <h3 className="font-display text-xl text-paper mb-3">{c.title}</h3>
+                <p className="text-sm text-paper/75 leading-relaxed">{c.body}</p>
               </motion.div>
             ))}
           </div>
@@ -203,7 +203,7 @@ export default function OurBusiness() {
       </section>
 
       {/* Current Deals */}
-      <section className="py-28 lg:py-36 bg-paper">
+      <section className="py-28 lg:py-36 bg-canvas">
         <div className="container-tb">
           <Reveal>
             <p className="eyebrow mb-6">Current Deals</p>
@@ -220,30 +220,30 @@ export default function OurBusiness() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.7, delay: i * 0.06, ease: [0.16, 1, 0.3, 1] }}
-                className="p-8 bg-cream border border-rule rounded-3xl hover:border-red-500/40 hover:bg-paper transition-all duration-500"
+                className="p-8 bg-canvas-2 border border-white/10 rounded-3xl hover:border-red-500/40 hover:bg-canvas transition-all duration-500"
               >
                 <div className="flex items-start justify-between mb-6">
                   <span className="text-[10px] uppercase tracking-[0.22em] text-red-500">
                     {deal.category}
                   </span>
-                  <span className="text-[10px] uppercase tracking-[0.18em] text-muted">
+                  <span className="text-[10px] uppercase tracking-[0.18em] text-paper/50">
                     Active
                   </span>
                 </div>
-                <h3 className="font-display text-xl text-navy-500 mb-2">{deal.name}</h3>
-                <p className="text-sm text-muted mb-6">{deal.city}</p>
-                <div className="grid grid-cols-2 gap-3 pt-6 border-t border-rule">
+                <h3 className="font-display text-xl text-paper mb-2">{deal.name}</h3>
+                <p className="text-sm text-paper/50 mb-6">{deal.city}</p>
+                <div className="grid grid-cols-2 gap-3 pt-6 border-t border-white/10">
                   <div>
-                    <p className="text-[10px] uppercase tracking-[0.18em] text-muted mb-1">
+                    <p className="text-[10px] uppercase tracking-[0.18em] text-paper/50 mb-1">
                       Land
                     </p>
-                    <p className="text-sm font-medium text-navy-500">{deal.landArea}</p>
+                    <p className="text-sm font-medium text-paper">{deal.landArea}</p>
                   </div>
                   <div>
-                    <p className="text-[10px] uppercase tracking-[0.18em] text-muted mb-1">
+                    <p className="text-[10px] uppercase tracking-[0.18em] text-paper/50 mb-1">
                       Development
                     </p>
-                    <p className="text-sm font-medium text-navy-500">{deal.developmentArea}</p>
+                    <p className="text-sm font-medium text-paper">{deal.developmentArea}</p>
                   </div>
                 </div>
               </motion.div>
@@ -253,7 +253,7 @@ export default function OurBusiness() {
       </section>
 
       {/* Pipeline cities */}
-      <section className="py-28 lg:py-36 bg-cream">
+      <section className="py-28 lg:py-36 bg-canvas-2">
         <div className="container-tb">
           <div className="grid lg:grid-cols-12 gap-12">
             <div className="lg:col-span-5">
@@ -266,7 +266,7 @@ export default function OurBusiness() {
                 </h2>
               </Reveal>
               <Reveal delay={0.2}>
-                <p className="mt-8 text-base lg:text-lg text-ink-soft leading-relaxed max-w-md">
+                <p className="mt-8 text-base lg:text-lg text-paper/75 leading-relaxed max-w-md">
                   On-ground investment opportunities across key growth markets — the cities where
                   India's next decade is being built.
                 </p>
@@ -281,10 +281,10 @@ export default function OurBusiness() {
                     whileInView={{ opacity: 1, scale: 1 }}
                     viewport={{ once: true }}
                     transition={{ duration: 0.5, delay: i * 0.05, ease: [0.16, 1, 0.3, 1] }}
-                    className="flex items-center gap-3 p-5 bg-paper border border-rule rounded-2xl hover:border-red-500/40 transition-colors group"
+                    className="flex items-center gap-3 p-5 bg-canvas border border-white/10 rounded-2xl hover:border-red-500/40 transition-colors group"
                   >
                     <span className="w-2 h-2 rounded-full bg-red-500 group-hover:scale-150 transition-transform" />
-                    <span className="font-display text-lg text-navy-500">{city}</span>
+                    <span className="font-display text-lg text-paper">{city}</span>
                   </motion.div>
                 ))}
               </div>

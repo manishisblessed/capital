@@ -73,7 +73,7 @@ export function Footer() {
                 </a>
               </li>
               <li>
-                <a href="mailto:contact@tridentbay.in" className="hover:text-red-300 transition-colors">
+                <a href="mailto:dhananjay@landmarkcapital.in" className="hover:text-red-300 transition-colors">
                   Email Us
                 </a>
               </li>
@@ -82,7 +82,7 @@ export function Footer() {
         </div>
 
         <div className="mt-16 pt-8 border-t border-white/10 flex flex-col md:flex-row items-start md:items-center justify-between gap-4 text-xs text-paper/50">
-          <p>© {new Date().getFullYear()} TridentBay Asset Managers. All rights reserved.</p>
+          <p>© {new Date().getFullYear()} Landmark Capital. All rights reserved.</p>
           <p className="font-light italic">Not More Real Estate. Better Real Estate.</p>
         </div>
       </div>

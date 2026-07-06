@@ -36,7 +36,7 @@ export default function LVF() {
       />
 
       {/* Advantages */}
-      <section className="py-28 lg:py-36 bg-paper">
+      <section className="py-28 lg:py-36 bg-canvas">
         <div className="container-tb">
           <Reveal>
             <p className="eyebrow mb-6">Regulatory Framework</p>
@@ -47,7 +47,7 @@ export default function LVF() {
             </h2>
           </Reveal>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-px bg-rule rounded-3xl overflow-hidden">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-px bg-white/10 rounded-3xl overflow-hidden">
             {advantages.map((a, i) => (
               <motion.div
                 key={a.title}
@@ -55,15 +55,15 @@ export default function LVF() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.7, delay: i * 0.08, ease: [0.16, 1, 0.3, 1] }}
-                className="bg-paper p-10 lg:p-12 hover:bg-cream transition-colors duration-500 relative group"
+                className="bg-canvas p-10 lg:p-12 hover:bg-canvas-2 transition-colors duration-500 relative group"
               >
                 <span className="absolute top-6 right-6 font-display text-2xl text-rule group-hover:text-red-500/40 transition-colors">
                   {String(i + 1).padStart(2, "0")}
                 </span>
-                <h3 className="font-display text-2xl text-navy-500 mb-4 mt-4 max-w-md">
+                <h3 className="font-display text-2xl text-paper mb-4 mt-4 max-w-md">
                   {a.title}
                 </h3>
-                <p className="text-base leading-relaxed text-ink-soft max-w-md">{a.body}</p>
+                <p className="text-base leading-relaxed text-paper/75 max-w-md">{a.body}</p>
               </motion.div>
             ))}
           </div>
