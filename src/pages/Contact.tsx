@@ -1,8 +1,10 @@
 import { useState, type FormEvent } from "react";
-import { motion } from "framer-motion";
 import { PageHero } from "@/components/common/PageHero";
 import { Reveal } from "@/components/common/Reveal";
-import { Send, MapPin, Mail, Phone } from "lucide-react";
+import { Button } from "@/components/common/Button";
+import { Icon } from "@/components/common/Icon";
+import { Seo } from "@/components/common/Seo";
+import { MapPin, Mail, Phone } from "lucide-react";
 
 type FormState = {
   name: string;
@@ -20,7 +22,6 @@ export default function Contact() {
   const onSubmit = (e: FormEvent) => {
     e.preventDefault();
     setStatus("sending");
-    // Placeholder — wire up to actual endpoint later
     setTimeout(() => {
       setStatus("sent");
       setForm(initial);
@@ -30,28 +31,25 @@ export default function Contact() {
 
   return (
     <>
+      <Seo
+        title="Contact"
+        description="Reach out regarding investment opportunities, fund participation, or strategic partnerships. Responses are handled with discretion."
+      />
       <PageHero
         eyebrow="Contact"
-        title={
-          <>
-            <span className="block">Happy to answer</span>
-            <span className="italic font-light block">your queries.</span>
-          </>
-        }
-        subtitle="Reach out about investment opportunities, fund participation, or strategic partnerships."
+        title="We welcome serious inquiries."
+        subtitle="Reach out regarding investment opportunities, fund participation, or strategic partnerships. Responses are handled with discretion."
       />
 
-      <section className="py-20 lg:py-28 bg-canvas">
+      <section className="section-pad bg-ivory">
         <div className="container-tb">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-20">
-            {/* Form */}
             <div className="lg:col-span-7">
               <Reveal>
-                <p className="eyebrow mb-6">Send us a message</p>
-                <h2 className="display-3 mb-12">Let's talk.</h2>
+                <h2 className="display-3 mb-10">Send a message</h2>
               </Reveal>
 
-              <form onSubmit={onSubmit} className="space-y-2">
+              <form onSubmit={onSubmit} className="space-y-6">
                 <Field
                   label="Name"
                   type="text"
@@ -80,77 +78,70 @@ export default function Contact() {
                   onChange={(v) => setForm({ ...form, message: v })}
                   required
                 />
-
-                <div className="pt-6">
-                  <button
-                    type="submit"
-                    disabled={status === "sending"}
-                    className="group inline-flex items-center gap-3 h-14 px-8 bg-navy-500 text-paper rounded-full text-sm uppercase tracking-[0.18em] transition-all duration-500 hover:bg-red-500 disabled:opacity-50 disabled:cursor-not-allowed"
-                  >
-                    <span>{status === "sent" ? "Sent" : status === "sending" ? "Sending..." : "Send Message"}</span>
-                    <Send size={16} className="transition-transform duration-500 group-hover:translate-x-1" />
-                  </button>
-                  {status === "sent" && (
-                    <motion.p
-                      initial={{ opacity: 0, y: 8 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      className="mt-4 text-sm text-red-500"
-                    >
-                      Thank you. We'll get back to you shortly.
-                    </motion.p>
-                  )}
-                </div>
+                <Button type="submit" variant="primary" disabled={status === "sending"}>
+                  {status === "sending" ? "Sending…" : status === "sent" ? "Message sent" : "Submit"}
+                </Button>
               </form>
             </div>
 
-            {/* Info */}
             <div className="lg:col-span-5">
-              <Reveal delay={0.15}>
-                <div className="bg-canvas-2 rounded-3xl p-10 lg:p-12">
-                  <p className="eyebrow mb-6">Office</p>
-                  <div className="space-y-8">
-                    <InfoItem icon={<MapPin size={18} />} label="Location">
-                      63, 6th Floor, Maker Tower "F"
-                      <br />
-                      Cuffe Parade, Mumbai 400 005
-                      <br />
-                      Maharashtra, India
-                    </InfoItem>
-
-                    <InfoItem icon={<Phone size={18} />} label="Phone">
-                      +91 22 6236 6266 / 6277
-                    </InfoItem>
-
-                    <InfoItem icon={<Mail size={18} />} label="Email">
-                      <a href="mailto:dhananjay@landmarkcapital.in" className="hover:text-red-500 transition-colors">
+              <Reveal delay={0.05}>
+                <div className="bg-stone rounded-[12px] border border-border p-8 lg:p-10 space-y-8">
+                  <div className="flex gap-4">
+                    <Icon as={MapPin} size={20} className="text-crimson-500 shrink-0 mt-0.5" />
+                    <div>
+                      <p className="text-xs uppercase tracking-[0.14em] text-slate mb-2">Office</p>
+                      <address className="text-charcoal leading-relaxed not-italic">
+                        63, 6th Floor, Maker Tower &ldquo;F&rdquo;,
+                        <br />
+                        Cuffe Parade, Mumbai 400 005
+                      </address>
+                    </div>
+                  </div>
+                  <div className="flex gap-4">
+                    <Icon as={Phone} size={20} className="text-crimson-500 shrink-0 mt-0.5" />
+                    <div>
+                      <p className="text-xs uppercase tracking-[0.14em] text-slate mb-2">Phone</p>
+                      <p className="text-charcoal tabular-nums">
+                        <a href="tel:+912262366266" className="link-underline">
+                          +91 22 6236 6266
+                        </a>
+                        {" / "}
+                        <a href="tel:+912262366277" className="link-underline">
+                          6277
+                        </a>
+                      </p>
+                    </div>
+                  </div>
+                  <div className="flex gap-4">
+                    <Icon as={Mail} size={20} className="text-crimson-500 shrink-0 mt-0.5" />
+                    <div>
+                      <p className="text-xs uppercase tracking-[0.14em] text-slate mb-2">Email</p>
+                      <a
+                        href="mailto:dhananjay@landmarkcapital.in"
+                        className="text-charcoal link-underline"
+                      >
                         dhananjay@landmarkcapital.in
                       </a>
-                    </InfoItem>
+                    </div>
                   </div>
+                </div>
+              </Reveal>
+
+              <Reveal delay={0.1}>
+                <div className="mt-8 rounded-[12px] overflow-hidden border border-border aspect-[4/3]">
+                  <iframe
+                    title="Landmark Capital office on Google Maps"
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3774.215887046889!2d72.8167!3d18.9157!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMTjCsDU0JzU2LjUiTiA3MsKwNDknMDAuMSJF!5e0!3m2!1sen!2sin!4v1700000000000"
+                    className="w-full h-full border-0"
+                    loading="lazy"
+                    referrerPolicy="no-referrer-when-downgrade"
+                    allowFullScreen
+                  />
                 </div>
               </Reveal>
             </div>
           </div>
-        </div>
-      </section>
-
-      {/* Map */}
-      <section className="bg-canvas pb-24">
-        <div className="container-tb">
-          <Reveal>
-            <div className="overflow-hidden rounded-3xl border border-white/10">
-              <iframe
-                title="Landmark Capital office on Google Maps"
-                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3773.7068814076244!2d72.81616367507671!3d18.910856482244456!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3be7d1c5a8e8a5e9%3A0x5b5b5b5b5b5b5b5b!2sMaker%20Tower%20F%2C%20Cuffe%20Parade%2C%20Mumbai!5e0!3m2!1sen!2sin!4v1700000000000"
-                width="100%"
-                height="460"
-                style={{ border: 0 }}
-                allowFullScreen
-                loading="lazy"
-                referrerPolicy="no-referrer-when-downgrade"
-              />
-            </div>
-          </Reveal>
         </div>
       </section>
     </>
@@ -170,59 +161,32 @@ function Field({
   onChange: (v: string) => void;
   required?: boolean;
 }) {
-  const [focused, setFocused] = useState(false);
-  const hasValue = value.length > 0;
-  const float = focused || hasValue;
-
-  const sharedProps = {
-    value,
-    onChange: (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) =>
-      onChange(e.target.value),
-    onFocus: () => setFocused(true),
-    onBlur: () => setFocused(false),
-    required,
-    className:
-      "w-full bg-transparent border-0 border-b border-white/10 pt-7 pb-3 text-base text-paper outline-none transition-colors focus:border-red-500 placeholder-transparent resize-none",
-  };
+  const id = label.toLowerCase().replace(/\s+/g, "-");
+  const shared =
+    "w-full bg-paper border border-border rounded-[10px] px-4 py-3 text-charcoal placeholder:text-slate/50 focus:border-crimson-500 focus:outline-none transition-colors";
 
   return (
-    <div className="relative">
-      <label
-        className={`absolute left-0 transition-all duration-300 pointer-events-none ${
-          float
-            ? "top-1 text-[10px] uppercase tracking-[0.22em] text-red-500"
-            : "top-7 text-base text-paper/50"
-        }`}
-      >
-        {label}
-      </label>
+    <label htmlFor={id} className="block">
+      <span className="block text-xs uppercase tracking-[0.12em] text-slate mb-2">{label}</span>
       {type === "textarea" ? (
-        <textarea rows={4} {...(sharedProps as any)} />
+        <textarea
+          id={id}
+          rows={5}
+          value={value}
+          onChange={(e) => onChange(e.target.value)}
+          required={required}
+          className={shared + " resize-y min-h-[140px]"}
+        />
       ) : (
-        <input type={type} {...(sharedProps as any)} />
+        <input
+          id={id}
+          type={type}
+          value={value}
+          onChange={(e) => onChange(e.target.value)}
+          required={required}
+          className={shared}
+        />
       )}
-    </div>
-  );
-}
-
-function InfoItem({
-  icon,
-  label,
-  children,
-}: {
-  icon: React.ReactNode;
-  label: string;
-  children: React.ReactNode;
-}) {
-  return (
-    <div className="flex items-start gap-4">
-      <div className="w-10 h-10 rounded-full bg-canvas border border-white/10 grid place-items-center text-red-500 shrink-0">
-        {icon}
-      </div>
-      <div>
-        <p className="text-[10px] uppercase tracking-[0.22em] text-paper/50 mb-1">{label}</p>
-        <div className="text-base text-paper leading-relaxed">{children}</div>
-      </div>
-    </div>
+    </label>
   );
 }

@@ -1,157 +1,112 @@
-import { motion, useScroll, useTransform } from "framer-motion";
-import { useRef } from "react";
-import { Reveal, RevealText } from "@/components/common/Reveal";
-import { useTilt } from "@/hooks/useTilt";
+import { Link } from "react-router-dom";
+import { Reveal } from "@/components/common/Reveal";
+import { media } from "@/data/media";
+import { asOfQuarter } from "@/lib/format";
+
+const funds = [
+  {
+    title: "Multiplier Fund",
+    status: "Open",
+    reg: "IN/AIF2/21-22/0928",
+    to: "/strategies/multiplier",
+  },
+  {
+    title: "Opportunity Fund",
+    status: "Closed",
+    reg: "IN/AIF2/13-14/0068",
+    to: "/strategies/opportunity",
+  },
+];
 
 export function About() {
-  const ref = useRef<HTMLDivElement>(null);
-  const { scrollYProgress } = useScroll({
-    target: ref,
-    offset: ["start end", "end start"],
-  });
-  const yearY = useTransform(scrollYProgress, [0, 1], ["0%", "-12%"]);
-  const yearScale = useTransform(scrollYProgress, [0, 0.5, 1], [0.98, 1, 1.02]);
-
   return (
-    <section ref={ref} className="relative py-32 lg:py-40 bg-canvas overflow-hidden">
-      <div className="container-tb relative">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-20">
-          {/* Left — big year/figure */}
-          <div className="lg:col-span-5 relative">
-            <motion.div
-              style={{ y: yearY, scale: yearScale }}
-              className="sticky top-32"
-            >
-              <p className="eyebrow mb-8">About Us</p>
-              <div className="relative">
-                <span className="block font-display font-light text-paper leading-none text-[clamp(8rem,18vw,18rem)] tracking-tighter">
-                  30
-                </span>
-                <span className="absolute -bottom-2 left-2 text-sm uppercase tracking-[0.3em] text-red-500">
-                  + Years
-                </span>
-                {/* Decorative animated ring around the 30 */}
-                <motion.svg
-                  className="absolute -top-4 -right-4 w-32 h-32 pointer-events-none"
-                  viewBox="0 0 100 100"
-                  fill="none"
-                  aria-hidden
-                >
-                  <motion.circle
-                    cx="50"
-                    cy="50"
-                    r="46"
-                    stroke="#bb1c1c"
-                    strokeWidth="0.5"
-                    strokeDasharray="2 4"
-                    initial={{ rotate: 0 }}
-                    animate={{ rotate: 360 }}
-                    transition={{ duration: 40, repeat: Infinity, ease: "linear" }}
-                    style={{ transformOrigin: "50px 50px" }}
-                  />
-                </motion.svg>
-              </div>
-              <p className="mt-12 text-sm uppercase tracking-[0.22em] text-paper/50 max-w-xs">
-                One discipline. Refined through every cycle.
+    <section className="section-pad surface-stone">
+      <div className="container-tb">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-start">
+          <div className="lg:col-span-5">
+            <Reveal>
+              <div className="accent-bar mb-6" />
+              <p className="eyebrow mb-6">About</p>
+              <p className="font-display text-[clamp(5rem,12vw,8.5rem)] leading-none text-charcoal tracking-tight tabular-nums">
+                30<span className="text-crimson-500 text-3xl align-super">+</span>
               </p>
-            </motion.div>
+              <p className="mt-4 text-sm uppercase tracking-[0.16em] text-slate-blue">
+                Years of real estate discipline
+              </p>
+              <p className="mt-2 text-[10px] uppercase tracking-[0.18em] text-slate/70 tabular-nums">
+                {asOfQuarter()}
+              </p>
+              <div className="mt-10 overflow-hidden rounded-[12px] border border-border aspect-[4/3]">
+                <img
+                  src={media.about.src}
+                  alt={media.about.alt}
+                  className="w-full h-full object-cover"
+                  loading="lazy"
+                  decoding="async"
+                />
+              </div>
+            </Reveal>
           </div>
 
-          {/* Right — copy */}
           <div className="lg:col-span-7">
             <Reveal>
-              <h2 className="display-2 text-balance">
-                <RevealText text="One discipline," />
-                <br />
-                <span className="italic font-light">
-                  <RevealText text="for more than 30 years." delay={0.2} />
-                </span>
+              <h2 className="display-2 text-balance max-w-2xl">
+                One discipline, refined through every cycle.
               </h2>
             </Reveal>
 
-            <div className="mt-12 space-y-7 text-lg leading-relaxed text-paper/75 max-w-2xl">
-              <Reveal delay={0.1}>
+            <div className="mt-8 space-y-5 text-lg leading-relaxed text-slate max-w-2xl prose-institutional">
+              <Reveal delay={0.05}>
                 <p>
-                  Real estate is what we have done for more than three decades. Through every
-                  cycle of growth and recession, we have refined the same craft — becoming more
-                  precise, more disciplined, and more effective with time.
+                  Real estate is what we have done for more than three decades. Through every cycle
+                  of growth and recession, we have refined the same craft — becoming more precise,
+                  more disciplined, and more effective with time.
                 </p>
               </Reveal>
-              <Reveal delay={0.2}>
+              <Reveal delay={0.1}>
                 <p>
-                  Over the years, that discipline has taken different forms — portfolio
-                  management services, our two SEBI-registered Category II AIFs, Landmark
-                  Opportunity Fund and Landmark Multiplier Fund, and a number of exclusive,
-                  deal-level transactions structured directly with family offices.
-                  <span className="text-paper font-medium"> The vehicle has changed. The discipline has not.</span>
+                  That discipline has taken different forms — portfolio management services, our two
+                  SEBI-registered Category II AIFs, and exclusive deal-level transactions structured
+                  with family offices. The vehicle has changed. The discipline has not.
                 </p>
               </Reveal>
             </div>
 
-            {/* Fund cards */}
-            <div className="mt-16 grid grid-cols-1 sm:grid-cols-2 gap-4">
-              <Reveal delay={0.2}>
-                <FundChip
-                  title="Multiplier Fund"
-                  status="Open"
-                  reg="IN/AIF2/21-22/0928"
-                  category="Category II AIF"
-                  highlight
-                />
-              </Reveal>
-              <Reveal delay={0.3}>
-                <FundChip
-                  title="Opportunity Fund"
-                  status="Closed"
-                  reg="IN/AIF2/13-14/0068"
-                  category="Category II AIF"
-                />
-              </Reveal>
+            <div className="mt-12 border-t border-border">
+              {funds.map((fund) => (
+                <Link
+                  key={fund.reg}
+                  to={fund.to}
+                  className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 py-5 border-b border-border group"
+                >
+                  <div>
+                    <p className="font-display text-xl text-charcoal group-hover:text-crimson-500 transition-colors">
+                      {fund.title}
+                    </p>
+                    <p className="text-sm text-slate-blue mt-1 font-mono">{fund.reg}</p>
+                  </div>
+                  <span
+                    className={`text-xs uppercase tracking-[0.14em] ${
+                      fund.status === "Open" ? "text-crimson-500" : "text-bronze"
+                    }`}
+                  >
+                    {fund.status}
+                  </span>
+                </Link>
+              ))}
             </div>
+
+            <Reveal delay={0.15}>
+              <Link
+                to="/about"
+                className="inline-block mt-8 text-sm uppercase tracking-[0.1em] text-charcoal link-underline"
+              >
+                Read about the firm
+              </Link>
+            </Reveal>
           </div>
         </div>
       </div>
     </section>
-  );
-}
-
-function FundChip({
-  title,
-  status,
-  reg,
-  category,
-  highlight,
-}: {
-  title: string;
-  status: string;
-  reg: string;
-  category: string;
-  highlight?: boolean;
-}) {
-  const tiltRef = useTilt<HTMLDivElement>({ max: 6, scale: 1.015, glare: false });
-  return (
-    <div
-      ref={tiltRef}
-      className={`group relative p-6 rounded-3xl border transition-[border-color,background-color] duration-500 ${
-        highlight
-          ? "border-red-500/40 bg-red-500/10 hover:border-red-500/60 hover:bg-red-500/15"
-          : "border-white/10 bg-white/[0.03] hover:border-white/25"
-      }`}
-    >
-      <div className="flex items-start justify-between gap-3">
-        <div>
-          <p className="text-[10px] uppercase tracking-[0.22em] text-paper/50">{category}</p>
-          <h3 className="display-3 mt-2 text-paper">{title}</h3>
-        </div>
-        <span
-          className={`text-[10px] uppercase tracking-[0.2em] px-3 py-1 rounded-full ${
-            highlight ? "bg-red-500 text-white" : "bg-white/5 text-paper"
-          }`}
-        >
-          {status}
-        </span>
-      </div>
-      <p className="mt-4 text-xs font-mono text-paper/50">{reg}</p>
-    </div>
   );
 }

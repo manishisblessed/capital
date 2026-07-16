@@ -1,27 +1,29 @@
-import { motion } from "framer-motion";
 import { PageHero } from "@/components/common/PageHero";
 import { Reveal } from "@/components/common/Reveal";
+import { ButtonLink } from "@/components/common/Button";
+import { RiskDisclosure } from "@/components/common/Disclosures";
+import { Seo, financialProductJsonLd } from "@/components/common/Seo";
 
 const whyWarehousing = [
   {
     title: "Favorable Regulatory Landscape",
-    body: "Introduction of GST and the National Logistics Policy continues to formalize and accelerate the warehousing sector.",
+    body: "GST and the National Logistics Policy continue to formalize and accelerate the warehousing sector.",
   },
   {
     title: "E-commerce & 3PL Demand",
-    body: "The e-commerce sector has emerged as the most prominent driver of Indian warehousing market volumes alongside 3PL players.",
+    body: "E-commerce and third-party logistics remain the primary drivers of warehousing market volumes.",
   },
   {
     title: "Grade A Demand",
-    body: "Global best practices driving the changes leading to greater demand for institutional Grade A warehousing.",
+    body: "Institutional standards are increasing demand for Grade A warehousing inventory.",
   },
   {
     title: "Tier II City Expansion",
-    body: "Increase in inventory levels leading to increased demand for space including Tier II cities.",
+    body: "Rising inventory needs are extending demand into Tier II cities.",
   },
   {
     title: "Omni-channel Retail",
-    body: "Change in technology and demography has led to an increase in consumer expectations, transforming the retail model.",
+    body: "Changing technology and demography continue to reshape retail fulfilment models.",
   },
 ];
 
@@ -32,7 +34,7 @@ const strategy = [
   },
   {
     title: "Capital Value Creation",
-    body: "Enables participation in capital value creation by entering the deal at the right stage.",
+    body: "Participate in capital value creation by entering at the appropriate stage of the development cycle.",
   },
   {
     title: "Leasing & Facility Management",
@@ -40,12 +42,12 @@ const strategy = [
   },
   {
     title: "Exit Strategy",
-    body: "Ensure exit at the right stage through multiple exit strategies.",
+    body: "Multiple exit pathways defined to support timely liquidity.",
   },
 ];
 
 const highlights = [
-  { label: "Tenure", value: "4 years", note: "From 31st January, 2024 (Final Close Date)" },
+  { label: "Tenure", value: "4 years", note: "From 31 January 2024 (Final Close Date)" },
   { label: "Target Corpus", value: "₹500 Cr", note: "Including ₹200 Cr green shoe option" },
   { label: "Target Returns", value: "18–20%+", note: "Gross IRR" },
   { label: "Investment Size", value: "₹50–75 Cr", note: "Across 6–8 investments" },
@@ -54,132 +56,103 @@ const highlights = [
 export default function MultiplierFund() {
   return (
     <>
+      <Seo
+        title="Multiplier Fund"
+        description="A SEBI Category II Alternative Investment Fund focused on high-quality, built-to-suit warehousing in economic hotspots across India."
+        jsonLd={financialProductJsonLd({
+          name: "Landmark Multiplier Fund",
+          description:
+            "SEBI Category II Alternative Investment Fund investing in built-to-suit warehousing across India.",
+          sebiRegistration: "IN/AIF2/21-22/0928",
+          category: "Category II Alternative Investment Fund",
+          path: "/strategies/multiplier",
+        })}
+      />
       <PageHero
-        eyebrow="Multiplier Fund — Open"
-        title={
-          <>
-            <span className="block">Built-to-suit</span>
-            <span className="italic font-light block">warehousing.</span>
-          </>
-        }
-        subtitle="The fund seeks to invest in high quality, built-to-suit warehouses having strong leasing potential in economic hotspots such as Pune, Delhi, Mumbai, Ahmedabad, and Bangalore."
+        eyebrow="Multiplier Fund"
+        title="Built-to-suit warehousing."
+        subtitle="The fund seeks to invest in high-quality, built-to-suit warehouses with strong leasing potential in economic hotspots such as Pune, Delhi, Mumbai, Ahmedabad and Bengaluru."
       >
         <div className="flex flex-wrap items-center gap-3">
-          <span className="px-4 py-1.5 rounded-full bg-red-500 text-paper text-[10px] uppercase tracking-[0.2em]">
-            Open For Subscription
+          <span className="px-3 py-1.5 rounded-[8px] bg-crimson-500 text-white text-[10px] uppercase tracking-[0.16em]">
+            Open for subscription
           </span>
-          <span className="px-4 py-1.5 rounded-full bg-white/5 text-paper text-[10px] uppercase tracking-[0.2em] font-mono">
+          <span className="px-3 py-1.5 rounded-[8px] border border-border text-charcoal text-[10px] uppercase tracking-[0.16em] font-mono">
             IN/AIF2/21-22/0928
           </span>
         </div>
       </PageHero>
 
-      {/* Why Warehousing */}
-      <section className="py-28 lg:py-36 bg-canvas">
-        <div className="container-tb">
-          <div className="grid lg:grid-cols-12 gap-12 mb-16">
-            <div className="lg:col-span-5">
-              <Reveal>
-                <p className="eyebrow mb-6">Why Warehousing</p>
-                <h2 className="display-2 text-balance">
-                  Tailwinds aligning <span className="italic font-light">all at once.</span>
-                </h2>
-              </Reveal>
-            </div>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-px bg-white/10 rounded-3xl overflow-hidden">
-            {whyWarehousing.map((item, i) => (
-              <motion.div
-                key={item.title}
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.7, delay: i * 0.06, ease: [0.16, 1, 0.3, 1] }}
-                className="bg-canvas p-10 hover:bg-canvas-2 transition-colors duration-500 relative"
-              >
-                <span className="absolute top-6 right-6 font-display text-2xl text-rule">
-                  {String(i + 1).padStart(2, "0")}
-                </span>
-                <h3 className="font-display text-xl text-paper mb-4 mt-4 max-w-[200px]">
-                  {item.title}
-                </h3>
-                <p className="text-sm leading-relaxed text-paper/75">{item.body}</p>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Investment Strategy */}
-      <section className="py-28 lg:py-36 bg-navy-500 text-paper">
-        <div className="container-tb">
-          <div className="grid lg:grid-cols-12 gap-12 mb-16">
-            <div className="lg:col-span-5">
-              <Reveal>
-                <p className="eyebrow text-red-300 mb-6">Investment Strategy</p>
-                <h2 className="display-2 text-paper text-balance">
-                  Four stages,
-                  <br />
-                  <span className="italic font-light text-red-300">one discipline.</span>
-                </h2>
-              </Reveal>
-            </div>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-px bg-white/10 rounded-3xl overflow-hidden">
-            {strategy.map((s, i) => (
-              <motion.div
-                key={s.title}
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.7, delay: i * 0.08, ease: [0.16, 1, 0.3, 1] }}
-                className="bg-navy-500 p-10 lg:p-12 hover:bg-navy-600 transition-colors duration-500 relative"
-              >
-                <span className="font-display text-5xl text-red-300/40">
-                  0{i + 1}
-                </span>
-                <h3 className="font-display text-2xl text-paper mt-6 mb-4">{s.title}</h3>
-                <p className="text-sm leading-relaxed text-paper/65">{s.body}</p>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Highlights */}
-      <section className="py-28 lg:py-36 bg-canvas">
+      <section className="section-pad bg-ivory">
         <div className="container-tb">
           <Reveal>
-            <p className="eyebrow mb-6">Fund Highlights</p>
-            <h2 className="display-2 mb-16 text-balance">
-              Numbers, <span className="italic font-light">in summary.</span>
+            <p className="eyebrow mb-6">Thesis</p>
+            <h2 className="display-2 text-balance max-w-2xl mb-14">
+              Structural demand for institutional warehousing.
             </h2>
           </Reveal>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-px bg-white/10 rounded-3xl overflow-hidden">
-            {highlights.map((h, i) => (
-              <motion.div
-                key={h.label}
-                initial={{ opacity: 0, y: 24 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.7, delay: i * 0.08, ease: [0.16, 1, 0.3, 1] }}
-                className="bg-canvas p-10 lg:p-12"
-              >
-                <p className="text-[10px] uppercase tracking-[0.22em] text-red-500 mb-6">
-                  {h.label}
-                </p>
-                <p className="font-display text-4xl lg:text-5xl text-paper mb-4 leading-none">
-                  {h.value}
-                </p>
-                <p className="text-xs text-paper/50 leading-relaxed">{h.note}</p>
-              </motion.div>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-10 gap-y-12 border-t border-border pt-12">
+            {whyWarehousing.map((item, i) => (
+              <Reveal key={item.title} delay={i * 0.03}>
+                <span className="text-xs font-mono text-crimson-500">
+                  {String(i + 1).padStart(2, "0")}
+                </span>
+                <h3 className="font-display text-xl text-charcoal mt-3 mb-3">{item.title}</h3>
+                <p className="text-slate leading-relaxed">{item.body}</p>
+              </Reveal>
             ))}
           </div>
         </div>
       </section>
+
+      <section className="section-pad bg-stone">
+        <div className="container-tb">
+          <Reveal>
+            <p className="eyebrow mb-6">Investment strategy</p>
+            <h2 className="display-2 mb-14 text-balance">Four stages, one discipline.</h2>
+          </Reveal>
+          <div className="border-t border-border">
+            {strategy.map((s, i) => (
+              <Reveal key={s.title}>
+                <div className="grid grid-cols-1 md:grid-cols-12 gap-4 py-8 border-b border-border">
+                  <span className="md:col-span-2 font-mono text-sm text-crimson-500">
+                    {String(i + 1).padStart(2, "0")}
+                  </span>
+                  <h3 className="md:col-span-3 font-display text-xl text-charcoal">{s.title}</h3>
+                  <p className="md:col-span-7 text-slate leading-relaxed">{s.body}</p>
+                </div>
+              </Reveal>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="section-pad bg-ivory">
+        <div className="container-tb">
+          <Reveal>
+            <p className="eyebrow mb-6">Fund highlights</p>
+            <h2 className="display-2 mb-14">Summary terms</h2>
+          </Reveal>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 border-t border-border pt-12">
+            {highlights.map((h) => (
+              <Reveal key={h.label}>
+                <p className="text-xs uppercase tracking-[0.14em] text-slate mb-3">{h.label}</p>
+                <p className="stat-figure font-display text-3xl lg:text-4xl text-charcoal mb-3 tabular-nums">
+                  {h.value}
+                </p>
+                <p className="text-sm text-slate leading-relaxed">{h.note}</p>
+              </Reveal>
+            ))}
+          </div>
+          <div className="mt-12">
+            <ButtonLink to="/contact" variant="primary">
+              Inquire about participation
+            </ButtonLink>
+          </div>
+        </div>
+      </section>
+
+      <RiskDisclosure />
     </>
   );
 }

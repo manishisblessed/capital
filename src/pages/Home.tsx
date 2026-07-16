@@ -4,26 +4,27 @@ import { About } from "@/components/sections/About";
 import { WhatWeDo } from "@/components/sections/WhatWeDo";
 import { Difference } from "@/components/sections/Difference";
 import { TrackRecord } from "@/components/sections/TrackRecord";
-import { HorizontalDeals } from "@/components/sections/HorizontalDeals";
-import { ScrollMarquee } from "@/components/sections/ScrollMarquee";
 import { WhoWeServe } from "@/components/sections/WhoWeServe";
 import { OurPeoplePreview } from "@/components/sections/OurPeoplePreview";
 import { ContactCTA } from "@/components/sections/ContactCTA";
-import { useGsapWithLenis } from "@/hooks/useGsap";
+import { Seo, orgJsonLd } from "@/components/common/Seo";
 
 export default function Home() {
-  useGsapWithLenis();
-
   return (
     <>
+      <Seo
+        title="Landmark Capital — Institutional real estate investing"
+        description="Landmark Capital delivers institutional-grade real estate investment and advisory solutions built on expertise, transparency and disciplined execution across India."
+        path="/"
+        jsonLd={orgJsonLd}
+        raw
+      />
       <Hero />
       <PinnedManifesto />
       <About />
       <WhatWeDo />
       <Difference />
       <TrackRecord />
-      <HorizontalDeals />
-      <ScrollMarquee />
       <WhoWeServe />
       <OurPeoplePreview />
       <ContactCTA />

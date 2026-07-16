@@ -5,26 +5,28 @@ export type NavItem = {
 };
 
 export const nav: NavItem[] = [
-  { label: "Home", to: "/" },
-  { label: "Our Business", to: "/our-business" },
-  { label: "Our People", to: "/our-people" },
+  { label: "About", to: "/about" },
   {
-    label: "Funds",
-    to: "/funds",
+    label: "Strategies",
+    to: "/strategies",
     children: [
-      { label: "Multiplier Fund (Open)", to: "/funds/multiplier" },
-      { label: "Opportunity Fund (Closed)", to: "/funds/opportunity" },
-      { label: "LVF — Large Value Fund", to: "/funds/lvf" },
-      { label: "Direct SPV Route", to: "/funds/spv" },
+      { label: "Overview", to: "/strategies" },
+      { label: "Multiplier Fund", to: "/strategies/multiplier" },
+      { label: "Opportunity Fund", to: "/strategies/opportunity" },
+      { label: "LVF", to: "/strategies/lvf" },
+      { label: "Direct SPV", to: "/strategies/spv" },
     ],
   },
+  { label: "Opportunities", to: "/opportunities" },
+  { label: "Transactions", to: "/transactions" },
   {
-    label: "Knowledge",
-    to: "/knowledge",
+    label: "Insights",
+    to: "/insights",
     children: [
-      { label: "Blogs", to: "/knowledge/blogs" },
-      { label: "FAQ", to: "/knowledge/faq" },
+      { label: "Research & Insights", to: "/insights" },
+      { label: "FAQ", to: "/insights/faq" },
     ],
   },
+  { label: "Leadership", to: "/leadership" },
   { label: "Contact", to: "/contact" },
 ];

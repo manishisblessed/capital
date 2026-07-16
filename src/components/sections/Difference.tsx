@@ -1,23 +1,23 @@
-import { useRef, useState } from "react";
-import { motion, AnimatePresence, useScroll, useTransform } from "framer-motion";
+import { useState } from "react";
+import { SectionHeader } from "@/components/common/SectionHeader";
 import { Reveal } from "@/components/common/Reveal";
-import { ArrowUpRight } from "lucide-react";
+import { cn } from "@/lib/utils";
 
 const differences = [
   {
     title: "Alignment Without Conflicts",
-    subtitle: "We ensure our interests and yours sit on the same side of the table.",
+    subtitle: "Our interests and yours sit on the same side of the table.",
     points: [
       "Independent platform, no competing mandates",
-      "Our returns come from performance, not asset accumulation",
-      "No conflicts that quietly cost you trust",
+      "Returns from performance, not asset accumulation",
+      "Governance designed to protect investor trust",
     ],
   },
   {
     title: "Real Estate Only, End to End",
-    subtitle: "We focus exclusively on real estate, across the full lifecycle of a deal.",
+    subtitle: "Exclusive focus on real estate across the full deal lifecycle.",
     points: [
-      "Acquisition through to exit, under one roof",
+      "Acquisition through exit under one roof",
       "Deep involvement in approvals, execution, and structuring",
       "Experienced operating partners on every asset",
     ],
@@ -37,24 +37,24 @@ const differences = [
     points: [
       "Deal-level reporting, not pooled summaries",
       "Transparent, timely investor communication",
-      "Institutional process, without institutional distance",
+      "Institutional process without institutional distance",
     ],
   },
   {
     title: "Fewer, Better Decisions",
-    subtitle: "Our edge isn't doing more deals. It's choosing the right ones.",
+    subtitle: "The edge is choosing the right deals — not doing more of them.",
     points: [
       "High bar for underwriting and selection",
-      "Focus over volume, every time",
+      "Focus over volume",
       "A small, experienced team close to every deal",
     ],
   },
   {
     title: "Relationships Built to Last",
-    subtitle: "We treat every investor and developer as a long-term partner, not a transaction.",
+    subtitle: "Long-term partners, not one-off transactions.",
     points: [
-      "Trust earned over years, not one closing",
-      "Access built on reputation, not marketing",
+      "Trust earned over years",
+      "Access built on reputation",
       "Shared success, measured honestly",
     ],
   },
@@ -62,108 +62,54 @@ const differences = [
 
 export function Difference() {
   const [active, setActive] = useState(0);
-  const ref = useRef<HTMLElement>(null);
-  const { scrollYProgress } = useScroll({
-    target: ref,
-    offset: ["start 60%", "end 40%"],
-  });
-  const railHeight = useTransform(scrollYProgress, [0, 1], ["0%", "100%"]);
+  const current = differences[active];
 
   return (
-    <section ref={ref} className="relative py-32 lg:py-40 bg-canvas-2 overflow-hidden">
+    <section className="section-pad surface-stone">
       <div className="container-tb">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 mb-20">
-          <div className="lg:col-span-5">
-            <Reveal>
-              <p className="eyebrow mb-6">The Difference</p>
-              <h2 className="display-2 text-balance">
-                The <span className="italic font-light">Landmark</span>
-                <br />
-                way of working.
-              </h2>
-            </Reveal>
-          </div>
-          <div className="lg:col-span-7 lg:pt-6 flex items-end">
-            <Reveal delay={0.2}>
-              <p className="text-lg text-paper/75 leading-relaxed max-w-2xl">
-                Six principles that shape every decision — from how we source deals to how we
-                report on them.
-              </p>
-            </Reveal>
-          </div>
-        </div>
+        <SectionHeader
+          align="split"
+          eyebrow="Principles"
+          title="The Landmark way of working."
+          description="Six principles that shape every decision — from how we source deals to how we report on them."
+          accent="trust"
+        />
 
-        {/* Interactive list view */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-16 relative">
-          {/* Vertical scroll-progress rail (left) */}
-          <div className="hidden lg:block absolute left-0 top-0 bottom-0 w-px bg-white/10 pointer-events-none">
-            <motion.div
-              style={{ height: railHeight }}
-              className="w-px bg-red-500 origin-top"
-            />
-          </div>
-
-          {/* Numbered tabs */}
-          <ul className="lg:col-span-5 flex flex-col lg:pl-6">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-16">
+          <div className="lg:col-span-5 border-t border-border">
             {differences.map((d, i) => (
-              <li key={d.title}>
-                <button
-                  onClick={() => setActive(i)}
-                  className={`group w-full flex items-start gap-6 py-7 border-b border-white/10 text-left transition-colors duration-500 ${
-                    active === i ? "text-paper" : "text-paper/50 hover:text-paper"
-                  }`}
-                >
-                  <span
-                    className={`text-xs font-mono tabular-nums pt-2 transition-colors ${
-                      active === i ? "text-red-500" : ""
-                    }`}
-                  >
-                    {String(i + 1).padStart(2, "0")}
-                  </span>
-                  <span className="flex-1">
-                    <span className="block font-display text-2xl lg:text-3xl">{d.title}</span>
-                  </span>
-                  <ArrowUpRight
-                    size={20}
-                    className={`mt-3 transition-all duration-500 ${
-                      active === i ? "rotate-0 text-red-500" : "-rotate-45 text-paper/50"
-                    }`}
-                  />
-                </button>
-              </li>
+              <button
+                key={d.title}
+                type="button"
+                onClick={() => setActive(i)}
+                aria-pressed={active === i}
+                className={cn(
+                  "w-full text-left py-4 border-b border-border transition-colors flex items-baseline gap-4 focus-visible:bg-stone focus-visible:text-crimson-500 focus-visible:outline-offset-[-2px]",
+                  active === i ? "text-crimson-500" : "text-charcoal hover:text-crimson-500"
+                )}
+              >
+                <span className="text-xs font-mono text-bronze shrink-0">
+                  {String(i + 1).padStart(2, "0")}
+                </span>
+                <span className="font-display text-xl">{d.title}</span>
+              </button>
             ))}
-          </ul>
+          </div>
 
-          {/* Detail panel */}
-          <div className="lg:col-span-7 relative">
-            <div className="sticky top-32">
-              <AnimatePresence mode="wait">
-                <motion.div
-                  key={active}
-                  initial={{ opacity: 0, y: 16, rotateX: 6 }}
-                  animate={{ opacity: 1, y: 0, rotateX: 0 }}
-                  exit={{ opacity: 0, y: -8, rotateX: -4 }}
-                  transition={{ duration: 0.55, ease: [0.16, 1, 0.3, 1] }}
-                  style={{ transformPerspective: 1200 }}
-                  className="bg-canvas rounded-3xl p-10 lg:p-12 border border-white/10 shadow-[0_30px_80px_-30px_rgba(0,0,0,0.7)]"
-                >
-                  <p className="text-2xl lg:text-3xl font-display italic text-paper leading-tight text-balance">
-                    "{differences[active].subtitle}"
-                  </p>
-                  <div className="rule my-10" />
-                  <ul className="space-y-5">
-                    {differences[active].points.map((point) => (
-                      <li key={point} className="flex items-start gap-4">
-                        <span className="text-red-500 mt-2 shrink-0">—</span>
-                        <span className="text-base lg:text-lg text-paper/75 leading-relaxed">
-                          {point}
-                        </span>
-                      </li>
-                    ))}
-                  </ul>
-                </motion.div>
-              </AnimatePresence>
-            </div>
+          <div className="lg:col-span-6 lg:col-start-7">
+            <Reveal key={current.title}>
+              <p className="eyebrow-trust mb-4">Principle detail</p>
+              <h3 className="display-3 mb-4">{current.title}</h3>
+              <p className="text-lg text-slate mb-8">{current.subtitle}</p>
+              <ul className="space-y-3">
+                {current.points.map((point) => (
+                  <li key={point} className="flex gap-3 text-charcoal">
+                    <span className="mt-2.5 w-1.5 h-1.5 rounded-full bg-bronze shrink-0" />
+                    {point}
+                  </li>
+                ))}
+              </ul>
+            </Reveal>
           </div>
         </div>
       </div>

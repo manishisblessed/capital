@@ -12,16 +12,16 @@ export const blogs: Blog[] = [
   {
     slug: "landmark-aligns-with-india-real-estate",
     title:
-      "How Landmark Capital Aligns With India's Evolving Real Estate and Investment Landscape",
+      "How Landmark Capital Aligns With India\u2019s Evolving Real Estate and Investment Landscape",
     excerpt:
-      "India's real estate sector has entered a phase of institutionalization, professional asset management, and yield-focused investing. Regulatory reforms, growing transparency, and the rise of long-term capital have shifted the market away from fragmented development toward professionally managed real estate assets.",
+      "India\u2019s real estate sector has entered a phase of institutionalization, professional asset management, and yield-focused investing. Regulatory reforms, growing transparency, and the rise of long-term capital have shifted the market away from fragmented development toward professionally managed real estate assets.",
     author: "Ashish Joshi",
     date: "2026-01-20",
     category: "Market",
   },
   {
     slug: "sebi-brokers-investor-money",
-    title: "SEBI's Plan to Separate Brokers from Investors Trade Money",
+    title: "SEBI\u2019s Plan to Separate Brokers from Investors Trade Money",
     excerpt:
       "Brokers have been enjoying a dream run as the numbers of Demat accounts in India have more than doubled in the last two and a half years. From 40.9 million in March 2020, they have now crossed 110 million.",
     author: "Harshita Singh",
@@ -39,9 +39,9 @@ export const blogs: Blog[] = [
   },
   {
     slug: "rise-of-indias-e-marketplaces",
-    title: "The Rise Of India's E-Marketplaces",
+    title: "The Rise Of India\u2019s E-Marketplaces",
     excerpt:
-      "India has emerged as a hotspot to e-commerce platforms in recent times. Researches suggest India's online marketplaces could be making sales worth as much as $350 billion a year by 2027.",
+      "India has emerged as a hotspot to e-commerce platforms in recent times. Researches suggest India\u2019s online marketplaces could be making sales worth as much as $350 billion a year by 2027.",
     author: "Neeta Joshi",
     date: "2022-12-28",
     category: "E-commerce",
@@ -68,7 +68,7 @@ export const blogs: Blog[] = [
     slug: "ev-indian-logistic-sector",
     title: "EV Adoption To Accelerate In The Indian Logistic Sector",
     excerpt:
-      "India's environmental pollution has reached the threshold level, which is a cause of great alarm. In the interest of the future of India, e-mobility seems the only viable option in the given circumstances.",
+      "India\u2019s environmental pollution has reached the threshold level, which is a cause of great alarm. In the interest of the future of India, e-mobility seems the only viable option in the given circumstances.",
     author: "Ashish Joshi",
     date: "2022-04-20",
     category: "Logistics",
@@ -104,14 +104,14 @@ export const blogs: Blog[] = [
     slug: "quick-commerce-going-dark",
     title: "Quick Commerce: Going Dark Is Just The Start",
     excerpt:
-      "Quick-commerce has become the buzzword in India's e-commerce market, promising delivering products in a jiffy. The Indian market opportunity of Q-commerce is estimated to be $ 0.3 billion in terms of overall GMV.",
+      "Quick-commerce has become the buzzword in India\u2019s e-commerce market, promising delivering products in a jiffy. The Indian market opportunity of Q-commerce is estimated to be $0.3 billion in terms of overall GMV.",
     author: "Shelly Patwari",
     date: "2022-03-21",
     category: "E-commerce",
   },
   {
     slug: "warehousing-vs-residential",
-    title: "Warehousing Vs Residential – Which is the more attractive asset class?",
+    title: "Warehousing vs. Residential \u2014 Which is the more attractive asset class?",
     excerpt:
       "Real Estate is one of the most traditional and recognized alternate investment classes. Real Estate is broadly divided into Residential (RRE) and Commercial (CRE).",
     author: "Drumil Gana",
@@ -120,16 +120,16 @@ export const blogs: Blog[] = [
   },
   {
     slug: "evergrande-debt-fueled-growth",
-    title: "China's Evergrande – Poster Child Of Debt Fueled Growth",
+    title: "China\u2019s Evergrande \u2014 Poster Child Of Debt-Fueled Growth",
     excerpt:
-      "US$ 300 Bln debt, operations across 280 cities and 1400 ongoing projects – That's China's real estate giant Evergrande, a fortune 500 company.",
+      "US$ 300 Bn debt, operations across 280 cities and 1,400 ongoing projects \u2014 that\u2019s China\u2019s real estate giant Evergrande, a Fortune 500 company.",
     author: "Ashish Joshi",
     date: "2021-09-24",
     category: "Global",
   },
   {
     slug: "grade-a-warehousing",
-    title: "Grade A Warehousing – The Way Forward",
+    title: "Grade A Warehousing \u2014 The Way Forward",
     excerpt:
       "Warehousing forms the core component of supply chain of any company that relies heavily on efficient distribution of its products encompassing the entire chain right from factories to shops to end-users.",
     author: "Manish Maloo",
@@ -138,25 +138,25 @@ export const blogs: Blog[] = [
   },
   {
     slug: "textile-pli-scheme",
-    title: "Textile PLI Scheme - All You Need To Know!",
+    title: "Textile PLI Scheme \u2014 All You Need To Know",
     excerpt:
-      "On Sept 8, 2021, The Union cabinet approved the PLI scheme worth ₹ 10,683 crores for the textile sector. The scheme aims to restore India's dominant market position in global textile exporter rankings.",
+      "On 8 September 2021, the Union Cabinet approved the PLI scheme worth \u20B910,683 crore for the textile sector. The scheme aims to restore India\u2019s dominant market position in global textile exporter rankings.",
     author: "Shelly Patwari",
     date: "2021-09-15",
     category: "Policy",
   },
   {
     slug: "pli-scheme-private-investments",
-    title: "PLI Scheme - Kick-Start To Private Investments",
+    title: "PLI Scheme \u2014 Kick-Start To Private Investments",
     excerpt:
-      "As the COVID-19 pandemic hit the economy in 2020, the importance of being 'Atmanirbhar' came into focus. In the Union Budget 2021-22, the Finance Minister announced an outlay of INR 1.97 Lakh Crores.",
+      "As the COVID-19 pandemic hit the economy in 2020, the importance of being \u2018Atmanirbhar\u2019 came into focus. In the Union Budget 2021\u201322, the Finance Minister announced an outlay of \u20B91.97 lakh crore.",
     author: "Shelly Patwari",
     date: "2021-09-15",
     category: "Policy",
   },
   {
     slug: "global-trade-container-shortage",
-    title: "Global Trade Nightmare – Container Shortage",
+    title: "Global Trade Nightmare \u2014 Container Shortage",
     excerpt:
       "Global shipping companies are facing a very unique challenge – Finding containers to ship goods. China is paying premium to get the containers back to fill them for exports.",
     author: "Ashish Joshi",
@@ -174,7 +174,7 @@ export const blogs: Blog[] = [
   },
   {
     slug: "ocean-freight-rate-spike",
-    title: "Ocean Freight Rate Spike – Reasons",
+    title: "Ocean Freight Rate Spike \u2014 Reasons",
     excerpt:
       "The exporters and importers are baffled by the abnormal rise in freight rate in container shipping business. The freight rate from China to Europe or North America, for a 40 ft container has gone up from US$ 2,000 to US$ 12,000.",
     author: "Ashish Joshi",
@@ -183,16 +183,16 @@ export const blogs: Blog[] = [
   },
   {
     slug: "gdp-growth-miracle-or-mirage",
-    title: "20% GDP growth — Miracle or Mirage?",
+    title: "20% GDP Growth \u2014 Miracle or Mirage?",
     excerpt:
-      "The Ministry of Statistics released GDP data for the first quarter of FY 2021-22. India's GDP grew by a whopping 20.1% year-on-year in Q1 in line with market expectations.",
+      "The Ministry of Statistics released GDP data for the first quarter of FY 2021\u201322. India\u2019s GDP grew 20.1% year-on-year in Q1, broadly in line with market expectations.",
     author: "Shelly Patwari",
     date: "2021-09-09",
     category: "Economy",
   },
   {
     slug: "emerging-trend-warehousing-logistics",
-    title: "Emerging Trend In 2021 And Beyond — Warehousing & Logistics",
+    title: "Emerging Trend In 2021 And Beyond \u2014 Warehousing & Logistics",
     excerpt:
       "The year 2019 and 2020 have been watershed years in the history of the modern world. Year 2021 is going to be the year of recovery and consolidation across industries.",
     author: "Ashish Joshi",

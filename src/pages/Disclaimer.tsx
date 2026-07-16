@@ -1,5 +1,6 @@
 import { PageHero } from "@/components/common/PageHero";
 import { Reveal } from "@/components/common/Reveal";
+import { Seo } from "@/components/common/Seo";
 
 const sections = [
   {
@@ -31,28 +32,29 @@ const sections = [
 export default function Disclaimer() {
   return (
     <>
+      <Seo
+        title="Disclaimer"
+        description="Important regulatory and legal information regarding Landmark Capital funds, investments and the use of this website."
+        noindex
+      />
       <PageHero
         eyebrow="Legal"
-        title={
-          <>
-            <span className="block">Disclaimer.</span>
-          </>
-        }
+        title="Disclaimer"
         subtitle="Important regulatory and legal information regarding our funds, investments, and the use of this website."
       />
 
-      <section className="py-20 lg:py-28 bg-canvas">
+      <section className="section-pad bg-ivory">
         <div className="container-narrow">
-          <div className="space-y-16">
+          <div className="space-y-14">
             {sections.map((s, i) => (
-              <Reveal key={s.title} delay={i * 0.04}>
+              <Reveal key={s.title} delay={i * 0.03}>
                 <div className="flex items-start gap-6">
-                  <span className="font-mono text-xs text-paper/50 tabular-nums pt-2 shrink-0">
+                  <span className="font-mono text-xs text-slate tabular-nums pt-2 shrink-0">
                     {String(i + 1).padStart(2, "0")}
                   </span>
                   <div className="flex-1">
-                    <h2 className="display-3 text-paper mb-4">{s.title}</h2>
-                    <p className="text-base lg:text-lg text-paper/75 leading-relaxed">{s.body}</p>
+                    <h2 className="display-3 text-charcoal mb-4">{s.title}</h2>
+                    <p className="text-base lg:text-lg text-slate leading-relaxed">{s.body}</p>
                   </div>
                 </div>
               </Reveal>

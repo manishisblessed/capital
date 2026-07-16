@@ -2,7 +2,7 @@ import { forwardRef, type ButtonHTMLAttributes, type AnchorHTMLAttributes } from
 import { Link } from "react-router-dom";
 import { cn } from "@/lib/utils";
 
-type Variant = "primary" | "ghost" | "outline" | "link";
+type Variant = "primary" | "secondary" | "ghost" | "link";
 type Size = "sm" | "md" | "lg";
 
 type CommonProps = {
@@ -12,23 +12,21 @@ type CommonProps = {
 };
 
 const base =
-  "inline-flex items-center justify-center gap-2 font-medium rounded-full transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] relative overflow-hidden group focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-red-500";
+  "inline-flex items-center justify-center gap-2 font-medium transition-all duration-300 relative focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-crimson-500 disabled:opacity-60";
 
 const variants: Record<Variant, string> = {
   primary:
-    "bg-navy-500 text-white hover:bg-red-500 hover:shadow-[0_10px_30px_-15px_rgba(187,28,28,0.6)]",
-  ghost:
-    "bg-transparent text-paper hover:bg-navy-500/5",
-  outline:
-    "bg-transparent border border-navy-500/20 text-paper hover:border-navy-500 hover:bg-navy-500 hover:text-white",
-  link:
-    "bg-transparent text-paper hover:text-red-500 px-0 rounded-none",
+    "bg-crimson-500 text-white hover:bg-crimson-600 rounded-[10px] shadow-[0_1px_0_rgba(36,41,47,0.06)]",
+  secondary:
+    "bg-paper text-charcoal border border-charcoal hover:bg-stone rounded-[10px]",
+  ghost: "bg-transparent text-charcoal hover:bg-stone rounded-[10px]",
+  link: "bg-transparent text-crimson-500 hover:text-crimson-600 px-0 rounded-none",
 };
 
 const sizes: Record<Size, string> = {
-  sm: "h-9 px-4 text-xs tracking-wider uppercase",
-  md: "h-11 px-6 text-sm tracking-wider uppercase",
-  lg: "h-14 px-9 text-sm tracking-wider uppercase",
+  sm: "h-9 px-4 text-xs tracking-[0.08em] uppercase",
+  md: "h-11 px-6 text-sm tracking-[0.08em] uppercase",
+  lg: "h-12 px-8 text-sm tracking-[0.08em] uppercase",
 };
 
 type ButtonProps = CommonProps & ButtonHTMLAttributes<HTMLButtonElement>;
@@ -41,7 +39,7 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
       {...props}
       className={cn(base, variants[variant], variant !== "link" && sizes[size], className)}
     >
-      <span className="relative z-10">{children}</span>
+      {children}
     </button>
   )
 );
@@ -57,16 +55,22 @@ export function ButtonLink({
   ...props
 }: LinkProps) {
   const combined = cn(base, variants[variant], variant !== "link" && sizes[size], className);
-  if (external || to.startsWith("http")) {
+  if (external || to.startsWith("http") || to.startsWith("mailto:")) {
     return (
-      <a href={to} target="_blank" rel="noreferrer noopener" className={combined} {...props}>
-        <span className="relative z-10">{children}</span>
+      <a
+        href={to}
+        target={to.startsWith("http") ? "_blank" : undefined}
+        rel={to.startsWith("http") ? "noreferrer noopener" : undefined}
+        className={combined}
+        {...props}
+      >
+        {children}
       </a>
     );
   }
   return (
     <Link to={to} className={combined}>
-      <span className="relative z-10">{children}</span>
+      {children}
     </Link>
   );
 }

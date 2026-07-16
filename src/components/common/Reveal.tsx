@@ -1,4 +1,4 @@
-import { motion, type Variants, type HTMLMotionProps } from "framer-motion";
+import { motion, useReducedMotion, type Variants, type HTMLMotionProps } from "framer-motion";
 import { type ReactNode } from "react";
 
 type Props = {
@@ -7,26 +7,27 @@ type Props = {
   y?: number;
   duration?: number;
   className?: string;
-  as?: keyof typeof motion;
   once?: boolean;
 } & Omit<HTMLMotionProps<"div">, "children">;
 
 export function Reveal({
   children,
   delay = 0,
-  y = 28,
-  duration = 0.9,
+  y = 16,
+  duration = 0.5,
   className,
   once = true,
   ...rest
 }: Props) {
+  const reduce = useReducedMotion();
   const variants: Variants = {
-    hidden: { opacity: 0, y, filter: "blur(6px)" },
+    hidden: { opacity: reduce ? 1 : 0, y: reduce ? 0 : y },
     visible: {
       opacity: 1,
       y: 0,
-      filter: "blur(0px)",
-      transition: { duration, delay, ease: [0.16, 1, 0.3, 1] },
+      transition: reduce
+        ? { duration: 0 }
+        : { duration, delay, ease: [0.16, 1, 0.3, 1] },
     },
   };
   return (
@@ -34,7 +35,7 @@ export function Reveal({
       className={className}
       initial="hidden"
       whileInView="visible"
-      viewport={{ once, amount: 0.1 }}
+      viewport={{ once, amount: 0.12 }}
       variants={variants}
       {...rest}
     >
@@ -43,34 +44,35 @@ export function Reveal({
   );
 }
 
-/**
- * Splits a string into words and reveals each one with a stagger.
- * Good for hero headlines.
- */
 export function RevealText({
   text,
   className,
   delay = 0,
-  staggerChildren = 0.06,
+  staggerChildren = 0.04,
 }: {
   text: string;
   className?: string;
   delay?: number;
   staggerChildren?: number;
 }) {
+  const reduce = useReducedMotion();
   const words = text.split(" ");
   const container: Variants = {
     hidden: {},
     visible: {
-      transition: { delayChildren: delay, staggerChildren },
+      transition: reduce
+        ? { duration: 0 }
+        : { delayChildren: delay, staggerChildren },
     },
   };
   const word: Variants = {
-    hidden: { y: "110%", opacity: 0 },
+    hidden: reduce ? { y: "0%", opacity: 1 } : { y: "100%", opacity: 0 },
     visible: {
       y: "0%",
       opacity: 1,
-      transition: { duration: 1.1, ease: [0.16, 1, 0.3, 1] },
+      transition: reduce
+        ? { duration: 0 }
+        : { duration: 0.55, ease: [0.16, 1, 0.3, 1] },
     },
   };
 

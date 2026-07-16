@@ -1,139 +1,95 @@
-import { useRef } from "react";
-import { motion, useScroll, useTransform } from "framer-motion";
+import { Link } from "react-router-dom";
+import { SectionHeader } from "@/components/common/SectionHeader";
 import { Reveal } from "@/components/common/Reveal";
-import { useInView } from "@/hooks/useInView";
-import { useCountUp } from "@/hooks/useCountUp";
 import { portfolioStats, trackRecord } from "@/data/stats";
-import type { Stat } from "@/data/stats";
+import { useCountUp } from "@/hooks/useCountUp";
+import { useInView } from "@/hooks/useInView";
+import { asOfQuarter } from "@/lib/format";
 
-export function TrackRecord() {
-  const ref = useRef<HTMLDivElement>(null);
-  const { scrollYProgress } = useScroll({ target: ref, offset: ["start end", "end start"] });
-  const lineScale = useTransform(scrollYProgress, [0, 1], [0, 1]);
-
+function StatFigure({
+  target,
+  decimals,
+  suffix,
+  prefix,
+}: {
+  target: number;
+  decimals: number;
+  suffix?: string;
+  prefix?: string;
+}) {
+  const { ref, inView } = useInView<HTMLSpanElement>({ once: true, threshold: 0.4 });
+  const value = useCountUp({ target, decimals, start: inView });
   return (
-    <section ref={ref} className="relative py-32 lg:py-40 bg-canvas overflow-hidden">
-      <div className="container-tb">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 mb-20">
-          <div className="lg:col-span-7">
-            <Reveal>
-              <p className="eyebrow mb-6">Track Record</p>
-              <h2 className="display-2 text-balance">
-                Built for India.
-                <br />
-                <span className="italic font-light">By people who know it well.</span>
-              </h2>
-            </Reveal>
-          </div>
-          <div className="lg:col-span-5 lg:pt-6">
-            <Reveal delay={0.2}>
-              <p className="text-base lg:text-lg text-paper/75 leading-relaxed">
-                Grounded in careful underwriting, aligned execution, and long-term value creation.
-                Since 2013, we've worked across <em>twelve Indian cities</em> and three core asset
-                classes — building a portfolio of over <em>six million square feet</em>.
-              </p>
-            </Reveal>
-          </div>
-        </div>
-
-        {/* Portfolio scale */}
-        <div className="relative">
-          <motion.div
-            style={{ scaleX: lineScale }}
-            className="absolute top-0 left-0 right-0 h-px bg-red-500 origin-left"
-          />
-          <h3 className="font-display text-xl text-paper/50 mt-10 mb-12 uppercase tracking-[0.18em]">
-            Current Portfolio Scale
-          </h3>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-px bg-white/10">
-            {portfolioStats.map((s, i) => (
-              <StatCard key={s.label} stat={s} index={i} />
-            ))}
-          </div>
-        </div>
-
-        {/* Team track record */}
-        <div className="mt-24">
-          <h3 className="font-display text-xl text-paper/50 mb-12 uppercase tracking-[0.18em]">
-            Team's Track Record
-          </h3>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-px bg-white/10">
-            {trackRecord.map((s, i) => (
-              <StatCard key={s.label} stat={s} index={i} variant="dark" />
-            ))}
-          </div>
-        </div>
-
-      </div>
-    </section>
+    <span
+      ref={ref}
+      className="stat-figure font-display text-4xl lg:text-5xl text-charcoal tracking-tight tabular-nums"
+    >
+      {prefix}
+      {value}
+      {suffix}
+    </span>
   );
 }
 
-function StatCard({
-  stat,
-  index,
-  variant = "light",
-}: {
-  stat: Stat;
-  index: number;
-  variant?: "light" | "dark";
-}) {
-  const { ref, inView } = useInView({ once: true, threshold: 0.4 });
-  const formatted = useCountUp({
-    target: stat.numericTarget,
-    decimals: stat.decimals,
-    duration: 2000,
-    start: inView,
-  });
+const asOf = asOfQuarter();
 
-  const isCurrency = stat.value.startsWith("₹");
-  const display = isCurrency
-    ? `₹${formatted}`
-    : formatted;
-
+export function TrackRecord() {
   return (
-    <motion.div
-      ref={ref as any}
-      initial={{ opacity: 0, y: 30 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true }}
-      transition={{ duration: 0.7, delay: index * 0.1, ease: [0.16, 1, 0.3, 1] }}
-      className={`relative p-10 lg:p-12 ${
-        variant === "dark" ? "bg-navy-500 text-paper" : "bg-canvas"
-      }`}
-    >
-      <div className="flex items-baseline gap-1">
-        <span
-          className={`font-display font-light text-[clamp(3.5rem,8vw,6rem)] leading-none tabular-nums ${
-            variant === "dark" ? "text-paper" : "text-paper"
-          }`}
-        >
-          {display}
-        </span>
-        {stat.suffix && (
-          <span
-            className={`font-display text-3xl lg:text-4xl ${
-              variant === "dark" ? "text-red-300" : "text-red-500"
-            }`}
+    <section className="section-pad surface-ivory">
+      <div className="container-tb">
+        <SectionHeader
+          align="split"
+          eyebrow="Track record"
+          title="Built for India. Measured in outcomes."
+          description="Since 2013, capital deployed across twelve cities and three asset classes — more than six million square feet underwritten and executed."
+          accent="bronze"
+        />
+
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 border-t border-border pt-10 mb-4">
+          {trackRecord.map((s) => (
+            <Reveal key={s.label}>
+              <p className="text-xs uppercase tracking-[0.14em] text-slate-blue mb-3">{s.label}</p>
+              <StatFigure
+                target={s.numericTarget}
+                decimals={s.decimals ?? 0}
+                suffix={s.label === "Investments" ? "\u00A0Cr" : s.suffix}
+                prefix={s.label === "Investments" ? "\u20B9\u2009" : undefined}
+              />
+              <p className="mt-2 text-sm text-slate">{s.description}</p>
+            </Reveal>
+          ))}
+        </div>
+
+        <p className="text-[10px] uppercase tracking-[0.18em] text-slate-blue tabular-nums mb-12">
+          {asOf}
+        </p>
+
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 bg-paper border border-border rounded-[12px] p-8 lg:p-12">
+          {portfolioStats.map((s) => (
+            <Reveal key={s.label}>
+              <p className="text-xs uppercase tracking-[0.14em] text-bronze mb-3">{s.label}</p>
+              <StatFigure
+                target={s.numericTarget}
+                decimals={s.decimals ?? 0}
+                suffix={s.suffix}
+              />
+              <p className="mt-2 text-sm text-slate">{s.description}</p>
+            </Reveal>
+          ))}
+        </div>
+        <p className="mt-4 text-[10px] uppercase tracking-[0.18em] text-slate-blue tabular-nums">
+          {asOf}
+        </p>
+
+        <Reveal>
+          <Link
+            to="/transactions"
+            className="inline-block mt-12 text-sm uppercase tracking-[0.1em] text-charcoal link-underline"
           >
-            {stat.suffix}
-          </span>
-        )}
+            View transactions
+          </Link>
+        </Reveal>
       </div>
-      <p
-        className={`mt-6 text-sm uppercase tracking-[0.18em] ${
-          variant === "dark" ? "text-paper/70" : "text-paper"
-        }`}
-      >
-        {stat.label}
-      </p>
-      <p
-        className={`mt-2 text-xs leading-relaxed max-w-[260px] ${
-          variant === "dark" ? "text-paper/50" : "text-paper/50"
-        }`}
-      >
-        {stat.description}
-      </p>
-    </motion.div>
+    </section>
   );
 }

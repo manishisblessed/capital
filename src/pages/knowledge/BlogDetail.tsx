@@ -1,8 +1,9 @@
 import { useParams, Link, Navigate } from "react-router-dom";
-import { motion } from "framer-motion";
 import { getBlog, blogs } from "@/data/blogs";
 import { ArrowLeft, ArrowUpRight } from "lucide-react";
 import { Reveal } from "@/components/common/Reveal";
+import { Icon } from "@/components/common/Icon";
+import { Seo, articleJsonLd } from "@/components/common/Seo";
 
 function formatDate(iso: string) {
   return new Date(iso).toLocaleDateString("en-IN", {
@@ -12,121 +13,168 @@ function formatDate(iso: string) {
   });
 }
 
+/** Approximate reading time in whole minutes at ~230 wpm. */
+function readingTime(text: string) {
+  const words = text.trim().split(/\s+/).length;
+  return Math.max(1, Math.round(words / 230));
+}
+
 export default function BlogDetail() {
   const { slug = "" } = useParams();
   const blog = getBlog(slug);
 
   if (!blog) {
-    return <Navigate to="/knowledge/blogs" replace />;
+    return <Navigate to="/insights" replace />;
   }
 
   const otherBlogs = blogs.filter((b) => b.slug !== slug).slice(0, 3);
+  const readMins = readingTime(blog.excerpt);
 
   return (
-    <article className="bg-canvas">
-      {/* Header */}
-      <header className="pt-40 lg:pt-52 pb-16 lg:pb-24 border-b border-white/10">
+    <article className="bg-ivory">
+      <Seo
+        title={blog.title}
+        description={blog.excerpt}
+        path={`/insights/${slug}`}
+        jsonLd={articleJsonLd({
+          title: blog.title,
+          description: blog.excerpt,
+          author: blog.author,
+          datePublished: blog.date,
+          path: `/insights/${slug}`,
+          image: blog.image,
+        })}
+      />
+      <header className="pt-36 lg:pt-44 pb-14 lg:pb-20 border-b border-border surface-stone">
         <div className="container-narrow">
           <Reveal>
             <Link
-              to="/knowledge/blogs"
-              className="inline-flex items-center gap-2 text-xs uppercase tracking-[0.22em] text-paper/50 hover:text-red-500 transition-colors mb-12"
+              to="/insights"
+              className="inline-flex items-center gap-2 text-xs uppercase tracking-[0.14em] text-slate-blue hover:text-crimson-500 transition-colors mb-10"
             >
-              <ArrowLeft size={14} />
-              All Articles
+              <Icon as={ArrowLeft} size={14} />
+              All insights
             </Link>
           </Reveal>
 
-          <Reveal delay={0.1}>
-            {blog.category && (
-              <p className="eyebrow mb-6">{blog.category}</p>
-            )}
+          <Reveal delay={0.05}>
+            <div className="accent-bar mb-6" />
+            {blog.category && <p className="eyebrow mb-5">{blog.category}</p>}
             <h1 className="display-1 text-balance">{blog.title}</h1>
           </Reveal>
 
-          <Reveal delay={0.25}>
-            <div className="mt-12 flex flex-wrap items-center gap-6 pt-8 border-t border-white/10">
+          <Reveal delay={0.1}>
+            <div className="mt-10 flex flex-wrap items-center gap-6 pt-8 border-t border-border">
               <div>
-                <p className="text-[10px] uppercase tracking-[0.22em] text-paper/50">Author</p>
-                <p className="text-base text-paper mt-1">{blog.author}</p>
+                <p className="text-[10px] uppercase tracking-[0.14em] text-slate-blue">Author</p>
+                <p className="text-base text-charcoal mt-1">{blog.author}</p>
               </div>
-              <div className="w-px h-10 bg-white/10" />
+              <div className="w-px h-10 bg-border" />
               <div>
-                <p className="text-[10px] uppercase tracking-[0.22em] text-paper/50">Published</p>
-                <p className="text-base text-paper mt-1">{formatDate(blog.date)}</p>
+                <p className="text-[10px] uppercase tracking-[0.14em] text-slate-blue">Published</p>
+                <p className="text-base text-charcoal mt-1 tabular-nums">
+                  {formatDate(blog.date)}
+                </p>
+              </div>
+              <div className="w-px h-10 bg-border" />
+              <div>
+                <p className="text-[10px] uppercase tracking-[0.14em] text-slate-blue">
+                  Reading time
+                </p>
+                <p className="text-base text-charcoal mt-1 tabular-nums">
+                  {readMins}&nbsp;min
+                </p>
               </div>
             </div>
           </Reveal>
         </div>
       </header>
 
-      {/* Body */}
-      <section className="py-20 lg:py-28">
+      <section className="section-pad">
         <div className="container-narrow">
           <Reveal>
-            <p className="font-display text-2xl lg:text-3xl leading-relaxed text-paper italic mb-16 text-balance">
-              "{blog.excerpt}"
+            <p className="font-display text-2xl lg:text-3xl leading-relaxed text-charcoal italic mb-4 text-balance border-l-2 border-bronze pl-6">
+              {blog.excerpt}
             </p>
           </Reveal>
 
-          <Reveal delay={0.1}>
-            <div className="prose-styles space-y-7 text-lg leading-relaxed text-paper/75">
+          <Reveal delay={0.05}>
+            <div className="mt-12 space-y-6 text-lg leading-relaxed text-slate">
               <p>
-                This article is part of Landmark Capital's ongoing series on the structural shifts
-                reshaping Indian real estate and investment markets. The full piece will be
+                This note is part of Landmark Capital&apos;s ongoing research series on structural
+                shifts in Indian real estate and investment markets. The full piece will be
                 published shortly.
               </p>
               <p>
-                In the meantime, browse our other perspectives or reach out to discuss specific
+                Themes under review include institutional warehousing demand, regulatory evolution
+                for Category II AIFs, and the role of deal-level transparency for sophisticated
+                capital.
+              </p>
+              <p>
+                In the meantime, browse related perspectives or contact the team to discuss specific
                 investment opportunities.
               </p>
             </div>
           </Reveal>
 
-          <Reveal delay={0.2}>
-            <div className="mt-20 pt-10 border-t border-white/10">
+          <Reveal delay={0.08}>
+            <aside
+              role="note"
+              aria-label="Investment Committee note"
+              className="mt-16 rounded-[12px] border border-border bg-stone/60 p-8 lg:p-10"
+            >
+              <p className="eyebrow-accent mb-4">Investment Committee note</p>
+              <p className="text-base lg:text-lg text-charcoal leading-relaxed max-w-2xl">
+                Research and insights published here reflect the Landmark Capital Investment
+                Committee&rsquo;s views and are intended for informational purposes only. They
+                do not constitute investment advice or an offer to invest.
+              </p>
+            </aside>
+          </Reveal>
+
+          <Reveal delay={0.1}>
+            <div className="mt-12 pt-8 border-t border-border flex flex-wrap gap-6">
               <Link
                 to="/contact"
-                className="inline-flex items-center gap-2 text-sm uppercase tracking-[0.18em] text-paper link-underline"
+                className="inline-flex items-center gap-2 text-sm uppercase tracking-[0.12em] text-charcoal link-underline"
               >
-                Get in touch
-                <ArrowUpRight size={16} />
+                Contact the team
+                <Icon as={ArrowUpRight} size={16} />
+              </Link>
+              <Link
+                to="/insights"
+                className="inline-flex items-center gap-2 text-sm uppercase tracking-[0.12em] text-slate-blue link-underline"
+              >
+                More research
               </Link>
             </div>
           </Reveal>
         </div>
       </section>
 
-      {/* Other articles */}
-      <section className="py-20 lg:py-28 bg-canvas-2">
+      <section className="section-pad surface-stone border-t border-border">
         <div className="container-tb">
-          <p className="eyebrow mb-10">Continue Reading</p>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            {otherBlogs.map((b, i) => (
-              <motion.div
-                key={b.slug}
-                initial={{ opacity: 0, y: 24 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.7, delay: i * 0.08, ease: [0.16, 1, 0.3, 1] }}
-              >
+          <p className="eyebrow-accent mb-10">Continue reading</p>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            {otherBlogs.map((b) => (
+              <Reveal key={b.slug}>
                 <Link
-                  to={`/knowledge/blogs/${b.slug}`}
-                  className="group block p-8 bg-canvas border border-white/10 rounded-3xl h-full hover:border-red-500/30 transition-all"
+                  to={`/insights/${b.slug}`}
+                  className="group block h-full p-6 bg-paper border border-border rounded-[12px] hover:border-bronze/50 transition-colors"
                 >
                   {b.category && (
-                    <p className="text-[10px] uppercase tracking-[0.22em] text-red-500 mb-4">
+                    <p className="text-[10px] uppercase tracking-[0.14em] text-crimson-500 mb-3">
                       {b.category}
                     </p>
                   )}
-                  <h3 className="font-display text-xl text-paper mb-4 group-hover:text-red-500 transition-colors leading-snug">
+                  <h3 className="font-display text-xl text-charcoal mb-3 group-hover:text-crimson-500 transition-colors leading-snug">
                     {b.title}
                   </h3>
-                  <p className="text-sm text-paper/50">
-                    {b.author} · {formatDate(b.date)}
+                  <p className="text-sm text-slate-blue">
+                    <span>{b.author}</span> · <span className="tabular-nums">{formatDate(b.date)}</span>
                   </p>
                 </Link>
-              </motion.div>
+              </Reveal>
             ))}
           </div>
         </div>

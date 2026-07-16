@@ -1,89 +1,166 @@
 import { Link } from "react-router-dom";
 import { Logo } from "@/components/common/Logo";
-import { Reveal } from "@/components/common/Reveal";
+
+const regulatoryDetails = [
+  { label: "Investment Manager", value: "Landmark Capital Advisors" },
+  { label: "SEBI Reg. — Multiplier Fund", value: "IN/AIF2/21-22/0928" },
+  { label: "SEBI Reg. — Opportunity Fund", value: "IN/AIF2/13-14/0068" },
+  { label: "Category", value: "II Alternative Investment Fund" },
+];
+
+const contactRegulatory = [
+  {
+    label: "Compliance Officer",
+    name: "Ravindra Gupta",
+    email: "compliance@landmarkcapital.in",
+  },
+  {
+    label: "Investor Grievance",
+    name: "Grievance Redressal Cell",
+    email: "grievance@landmarkcapital.in",
+  },
+];
 
 export function Footer() {
   return (
-    <footer className="bg-navy-500 text-paper relative overflow-hidden">
-      <div className="absolute inset-0 grid-backdrop opacity-[0.06] pointer-events-none" />
+    <footer
+      className="bg-midnight text-white relative overflow-hidden"
+      role="contentinfo"
+    >
+      <div
+        aria-hidden
+        className="absolute inset-0 opacity-[0.07] pointer-events-none"
+        style={{
+          backgroundImage:
+            "linear-gradient(to right, white 1px, transparent 1px), linear-gradient(to bottom, white 1px, transparent 1px)",
+          backgroundSize: "64px 64px",
+        }}
+      />
 
-      <div className="container-tb py-20 lg:py-28 relative">
-        <Reveal className="mb-16">
-          <p className="display-2 text-paper max-w-3xl text-balance">
-            Patient capital.<br />
-            <span className="text-red-300/90 italic font-light">Selected deals.</span><br />
-            Built for India.
-          </p>
-        </Reveal>
+      <div className="container-tb py-16 lg:py-20 relative">
+        <div className="accent-bar-bronze mb-8" />
+        <p className="display-2 text-white max-w-3xl text-balance mb-14">
+          Institutional real estate investing
+          <br />
+          <span className="italic font-light text-bronze">
+            backed by research and governance.
+          </span>
+        </p>
 
-        <div className="grid grid-cols-1 md:grid-cols-12 gap-12 pt-12 border-t border-white/10">
+        <div className="grid grid-cols-1 md:grid-cols-12 gap-12 pt-12 border-t border-white/15">
           <div className="md:col-span-4">
-            <Logo className="[&_span]:text-paper [&_*]:text-paper" />
-            <p className="mt-6 text-sm text-paper/70 leading-relaxed max-w-xs">
-              A SEBI-registered Alternative Investment Fund manager. Operating across Warehousing,
-              Residential, Industrial and Plotted Development across India.
+            <Logo onDark className="h-11 w-auto" />
+            <p className="mt-6 text-sm text-white/70 leading-relaxed max-w-xs">
+              A SEBI-registered Alternative Investment Fund manager. Operating across warehousing,
+              residential, industrial and plotted development across India.
             </p>
-            <div className="mt-6 text-xs text-paper/50 leading-relaxed">
-              63, 6th Floor, Maker Tower "F",<br />
+            <address className="mt-6 text-xs text-white/70 leading-relaxed not-italic">
+              63, 6th Floor, Maker Tower &ldquo;F&rdquo;,
+              <br />
               Cuffe Parade, Mumbai 400 005
-            </div>
+            </address>
           </div>
 
-          <div className="md:col-span-2">
-            <h4 className="text-[10px] tracking-[0.22em] uppercase text-paper/40 mb-5">Explore</h4>
-            <ul className="space-y-3 text-sm text-paper/80">
-              <li><Link to="/our-business" className="hover:text-red-300 transition-colors">Our Business</Link></li>
-              <li><Link to="/our-people" className="hover:text-red-300 transition-colors">Our People</Link></li>
-              <li><Link to="/contact" className="hover:text-red-300 transition-colors">Contact</Link></li>
-              <li><Link to="/disclaimer" className="hover:text-red-300 transition-colors">Disclaimer</Link></li>
+          <nav aria-label="Footer" className="md:col-span-2">
+            <h4 className="text-[10px] tracking-[0.22em] uppercase text-bronze mb-5">Explore</h4>
+            <ul className="space-y-3 text-sm text-white/80">
+              <li><Link to="/about" className="hover:text-white transition-colors">About</Link></li>
+              <li><Link to="/leadership" className="hover:text-white transition-colors">Leadership</Link></li>
+              <li><Link to="/contact" className="hover:text-white transition-colors">Contact</Link></li>
+              <li><Link to="/disclaimer" className="hover:text-white transition-colors">Disclaimer</Link></li>
             </ul>
-          </div>
+          </nav>
 
-          <div className="md:col-span-2">
-            <h4 className="text-[10px] tracking-[0.22em] uppercase text-paper/40 mb-5">Funds</h4>
-            <ul className="space-y-3 text-sm text-paper/80">
-              <li><Link to="/funds/multiplier" className="hover:text-red-300 transition-colors">Multiplier Fund</Link></li>
-              <li><Link to="/funds/opportunity" className="hover:text-red-300 transition-colors">Opportunity Fund</Link></li>
-              <li><Link to="/funds/lvf" className="hover:text-red-300 transition-colors">LVF</Link></li>
-              <li><Link to="/funds/spv" className="hover:text-red-300 transition-colors">Direct SPV</Link></li>
+          <nav aria-label="Strategies" className="md:col-span-2">
+            <h4 className="text-[10px] tracking-[0.22em] uppercase text-bronze mb-5">Strategies</h4>
+            <ul className="space-y-3 text-sm text-white/80">
+              <li><Link to="/strategies/multiplier" className="hover:text-white transition-colors">Multiplier Fund</Link></li>
+              <li><Link to="/strategies/opportunity" className="hover:text-white transition-colors">Opportunity Fund</Link></li>
+              <li><Link to="/strategies/lvf" className="hover:text-white transition-colors">LVF</Link></li>
+              <li><Link to="/strategies/spv" className="hover:text-white transition-colors">Direct SPV</Link></li>
             </ul>
-          </div>
+          </nav>
 
-          <div className="md:col-span-2">
-            <h4 className="text-[10px] tracking-[0.22em] uppercase text-paper/40 mb-5">Knowledge</h4>
-            <ul className="space-y-3 text-sm text-paper/80">
-              <li><Link to="/knowledge/blogs" className="hover:text-red-300 transition-colors">Blogs</Link></li>
-              <li><Link to="/knowledge/faq" className="hover:text-red-300 transition-colors">FAQ</Link></li>
+          <nav aria-label="Insights" className="md:col-span-2">
+            <h4 className="text-[10px] tracking-[0.22em] uppercase text-bronze mb-5">Insights</h4>
+            <ul className="space-y-3 text-sm text-white/80">
+              <li><Link to="/insights" className="hover:text-white transition-colors">Research & Insights</Link></li>
+              <li><Link to="/insights/faq" className="hover:text-white transition-colors">FAQ</Link></li>
               <li>
-                <a href="/Tax%20Reckoner.pdf" target="_blank" rel="noreferrer" className="hover:text-red-300 transition-colors">Tax Reckoner</a>
+                <a href="/Tax%20Reckoner.pdf" target="_blank" rel="noreferrer" className="hover:text-white transition-colors">Tax Reckoner</a>
               </li>
               <li>
-                <a href="https://smartodr.in/login" target="_blank" rel="noreferrer" className="hover:text-red-300 transition-colors">SmartODR Portal</a>
+                <a href="https://smartodr.in/login" target="_blank" rel="noreferrer" className="hover:text-white transition-colors">SmartODR Portal</a>
               </li>
             </ul>
-          </div>
+          </nav>
 
-          <div className="md:col-span-2">
-            <h4 className="text-[10px] tracking-[0.22em] uppercase text-paper/40 mb-5">Connect</h4>
-            <ul className="space-y-3 text-sm text-paper/80">
+          <nav aria-label="Connect" className="md:col-span-2">
+            <h4 className="text-[10px] tracking-[0.22em] uppercase text-bronze mb-5">Connect</h4>
+            <ul className="space-y-3 text-sm text-white/80">
               <li>
-                <a href="https://www.linkedin.com/" target="_blank" rel="noreferrer" className="hover:text-red-300 transition-colors inline-flex items-center gap-2">
-                  <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M19 0h-14C2.24 0 0 2.24 0 5v14c0 2.76 2.24 5 5 5h14c2.76 0 5-2.24 5-5V5c0-2.76-2.24-5-5-5zM8 19H5V8h3v11zM6.5 6.73C5.51 6.73 4.7 5.92 4.7 4.93s.81-1.8 1.8-1.8 1.8.81 1.8 1.8-.81 1.8-1.8 1.8zM20 19h-3v-5.6c0-3.37-4-3.12-4 0V19h-3V8h3v1.77c1.4-2.59 7-2.78 7 2.48V19z"/></svg>
+                <a href="https://www.linkedin.com/" target="_blank" rel="noreferrer" className="hover:text-white transition-colors">
                   LinkedIn
                 </a>
               </li>
               <li>
-                <a href="mailto:dhananjay@landmarkcapital.in" className="hover:text-red-300 transition-colors">
-                  Email Us
+                <a href="mailto:dhananjay@landmarkcapital.in" className="hover:text-white transition-colors">
+                  Email
                 </a>
               </li>
+              <li><Link to="/opportunities" className="hover:text-white transition-colors">Opportunities</Link></li>
+              <li><Link to="/transactions" className="hover:text-white transition-colors">Transactions</Link></li>
             </ul>
-          </div>
+          </nav>
         </div>
 
-        <div className="mt-16 pt-8 border-t border-white/10 flex flex-col md:flex-row items-start md:items-center justify-between gap-4 text-xs text-paper/50">
+        <div className="mt-14 pt-10 border-t border-white/15">
+          <h4 className="text-[10px] tracking-[0.22em] uppercase text-bronze mb-6">
+            Regulatory information
+          </h4>
+          <dl className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-x-8 gap-y-5">
+            {regulatoryDetails.map((r) => (
+              <div key={r.label}>
+                <dt className="text-[10px] tracking-[0.14em] uppercase text-white/55 mb-1.5">
+                  {r.label}
+                </dt>
+                <dd className="text-xs text-white/85 leading-relaxed font-mono tabular-nums">
+                  {r.value}
+                </dd>
+              </div>
+            ))}
+          </dl>
+
+          <div className="mt-8 pt-8 border-t border-white/10 grid grid-cols-1 md:grid-cols-2 gap-8">
+            {contactRegulatory.map((c) => (
+              <div key={c.label}>
+                <p className="text-[10px] tracking-[0.14em] uppercase text-white/55 mb-1.5">
+                  {c.label}
+                </p>
+                <p className="text-sm text-white/85">{c.name}</p>
+                <a
+                  href={`mailto:${c.email}`}
+                  className="text-xs text-white/70 hover:text-white transition-colors"
+                >
+                  {c.email}
+                </a>
+              </div>
+            ))}
+          </div>
+
+          <p className="mt-8 text-[11px] leading-relaxed text-white/60 max-w-4xl">
+            This website is intended for informational purposes only and does not constitute an
+            offer or solicitation to invest in any scheme managed by Landmark Capital. Investments
+            in Alternative Investment Funds are subject to market, liquidity and regulatory risks
+            and long lock-in periods. Investors should read the Private Placement Memorandum and
+            Contribution Agreement carefully before making any investment decision. Past
+            performance is not indicative of future results.
+          </p>
+        </div>
+
+        <div className="mt-12 pt-8 border-t border-white/15 flex flex-col md:flex-row items-start md:items-center justify-between gap-4 text-xs text-white/60">
           <p>© {new Date().getFullYear()} Landmark Capital. All rights reserved.</p>
-          <p className="font-light italic">Not More Real Estate. Better Real Estate.</p>
+          <p className="text-white/70">Institutional discipline. Local execution.</p>
         </div>
       </div>
     </footer>

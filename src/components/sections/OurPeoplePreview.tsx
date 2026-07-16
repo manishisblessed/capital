@@ -1,119 +1,51 @@
-import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import { Reveal } from "@/components/common/Reveal";
+import { Avatar } from "@/components/common/Avatar";
 import { leadership, teamMembers } from "@/data/team";
-import { ArrowUpRight } from "lucide-react";
-import { useTilt } from "@/hooks/useTilt";
+
+const preview = [...leadership, ...teamMembers].slice(0, 6);
 
 export function OurPeoplePreview() {
-  const featured = [...leadership, ...teamMembers].slice(0, 6);
-
   return (
-    <section className="relative py-32 lg:py-40 bg-canvas overflow-hidden">
+    <section className="section-pad surface-ivory">
       <div className="container-tb">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 mb-20">
-          <div className="lg:col-span-7">
-            <Reveal>
-              <p className="eyebrow mb-6">Our People</p>
-              <h2 className="display-2 text-balance">
-                A small team,
-                <br />
-                <span className="italic font-light">close to every deal.</span>
-              </h2>
-            </Reveal>
-          </div>
-          <div className="lg:col-span-5 lg:pt-6 flex flex-col gap-6">
-            <Reveal delay={0.2}>
-              <p className="text-base lg:text-lg text-paper/75 leading-relaxed">
-                The same people who originate, underwrite, structure, and execute. Decades of
-                experience across every cycle of Indian real estate.
-              </p>
-            </Reveal>
-            <Reveal delay={0.3}>
-              <Link
-                to="/our-people"
-                className="inline-flex items-center gap-2 text-sm uppercase tracking-[0.18em] text-paper link-underline self-start"
-              >
-                Meet the full team
-                <ArrowUpRight size={16} />
-              </Link>
-            </Reveal>
-          </div>
+        <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-6 mb-14">
+          <Reveal>
+            <div className="accent-bar mb-5" />
+            <p className="eyebrow mb-5">Leadership</p>
+            <h2 className="display-2 text-balance max-w-xl">
+              A small team, close to every deal.
+            </h2>
+          </Reveal>
+          <Reveal delay={0.05}>
+            <Link
+              to="/leadership"
+              className="text-sm uppercase tracking-[0.1em] text-charcoal link-underline"
+            >
+              Meet the full team
+            </Link>
+          </Reveal>
         </div>
 
-        <div className="grid grid-cols-2 lg:grid-cols-3 gap-px bg-white/10 rounded-3xl overflow-hidden">
-          {featured.map((member, i) => (
-            <TeamPreviewCard key={member.id} member={member} index={i} />
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-12">
+          {preview.map((m, i) => (
+            <Reveal key={m.id} delay={i * 0.04}>
+              <Link to="/leadership" className="group block">
+                <Avatar
+                  name={m.name}
+                  photo={m.photo}
+                  size="xl"
+                  className="mb-4 transition-opacity duration-300 group-hover:opacity-90"
+                />
+                <p className="font-display text-xl text-charcoal group-hover:text-crimson-500 transition-colors">
+                  {m.name}
+                </p>
+                <p className="text-sm text-slate-blue mt-1">{m.role}</p>
+              </Link>
+            </Reveal>
           ))}
         </div>
       </div>
     </section>
-  );
-}
-
-function TeamPreviewCard({
-  member,
-  index,
-}: {
-  member: { id: string; name: string; role: string };
-  index: number;
-}) {
-  const tiltRef = useTilt<HTMLDivElement>({ max: 5, scale: 1.008, glare: false });
-
-  return (
-    <motion.div
-      initial={{ opacity: 0, y: 24 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, amount: 0.1 }}
-      transition={{ duration: 0.7, delay: index * 0.05, ease: [0.16, 1, 0.3, 1] }}
-      className="bg-canvas p-8 lg:p-10 group hover:bg-canvas-2 transition-colors duration-500"
-    >
-      <div ref={tiltRef} className="relative">
-        <Avatar name={member.name} />
-        <div className="mt-6 flex items-start justify-between gap-3">
-          <div>
-            <h3 className="font-display text-xl text-paper">{member.name}</h3>
-            <p className="text-[10px] uppercase tracking-[0.22em] text-red-500 mt-1">
-              {member.role}
-            </p>
-          </div>
-          <ArrowUpRight
-            size={16}
-            className="text-paper/50 transition-transform duration-500 group-hover:rotate-0 -rotate-45 group-hover:text-red-500 mt-1"
-          />
-        </div>
-      </div>
-    </motion.div>
-  );
-}
-
-/**
- * Elegant initials-based avatar with subtle gradient — placeholder until photos arrive.
- */
-export function Avatar({ name, size = "md" }: { name: string; size?: "sm" | "md" | "lg" }) {
-  const initials = name
-    .split(" ")
-    .map((w) => w[0])
-    .slice(0, 2)
-    .join("")
-    .toUpperCase();
-
-  const sizeClass = {
-    sm: "w-14 h-14 text-base",
-    md: "w-20 h-20 text-xl",
-    lg: "w-32 h-32 text-3xl",
-  }[size];
-
-  return (
-    <div
-      className={`${sizeClass} rounded-full grid place-items-center font-display text-paper bg-canvas-3 border border-navy-500/10 relative overflow-hidden`}
-    >
-      {/* Decorative arch */}
-      <svg className="absolute inset-0 opacity-40" viewBox="0 0 80 80" fill="none" aria-hidden>
-        <path d="M0 60 Q 40 30, 80 60" stroke="#bb1c1c" strokeWidth="0.5" fill="none" />
-        <path d="M0 70 Q 40 40, 80 70" stroke="#04036b" strokeWidth="0.5" fill="none" opacity="0.4" />
-      </svg>
-      <span className="relative">{initials}</span>
-    </div>
   );
 }

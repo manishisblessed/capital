@@ -1,5 +1,6 @@
 import { lazy, Suspense } from "react";
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, Navigate, useParams } from "react-router-dom";
+import { MotionConfig } from "framer-motion";
 
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
@@ -9,8 +10,12 @@ import { PageTransition } from "@/components/layout/PageTransition";
 import { useLenis } from "@/hooks/useLenis";
 
 const Home = lazy(() => import("@/pages/Home"));
-const OurBusiness = lazy(() => import("@/pages/OurBusiness"));
-const OurPeople = lazy(() => import("@/pages/OurPeople"));
+const About = lazy(() => import("@/pages/About"));
+const Strategies = lazy(() => import("@/pages/Strategies"));
+const Opportunities = lazy(() => import("@/pages/Opportunities"));
+const Transactions = lazy(() => import("@/pages/Transactions"));
+const TransactionDetail = lazy(() => import("@/pages/TransactionDetail"));
+const Leadership = lazy(() => import("@/pages/Leadership"));
 const Contact = lazy(() => import("@/pages/Contact"));
 const Disclaimer = lazy(() => import("@/pages/Disclaimer"));
 const NotFound = lazy(() => import("@/pages/NotFound"));
@@ -26,41 +31,64 @@ const FAQ = lazy(() => import("@/pages/knowledge/FAQ"));
 
 function PageFallback() {
   return (
-    <div className="min-h-[100svh] grid place-items-center bg-canvas">
+    <div className="min-h-[100svh] grid place-items-center bg-ivory">
       <div className="flex flex-col items-center gap-4">
-        <div className="w-10 h-10 rounded-full border-2 border-white/10 border-t-red-500 animate-spin" />
-        <p className="text-xs uppercase tracking-[0.22em] text-paper/50">Loading</p>
+        <div className="w-8 h-8 rounded-full border-2 border-border border-t-crimson-500 animate-spin" />
+        <p className="text-xs uppercase tracking-[0.18em] text-slate">Loading</p>
       </div>
     </div>
   );
+}
+
+function LegacyBlogRedirect() {
+  const { slug } = useParams();
+  return <Navigate to={slug ? `/insights/${slug}` : "/insights"} replace />;
 }
 
 export default function App() {
   useLenis();
 
   return (
-    <>
+    <MotionConfig reducedMotion="user">
+      <a href="#main" className="skip-link">
+        Skip to content
+      </a>
       <ScrollProgress />
       <Navbar />
       <ScrollToTop />
-      <main>
+      <main id="main" tabIndex={-1}>
         <Suspense fallback={<PageFallback />}>
           <PageTransition>
             <Routes>
               <Route path="/" element={<Home />} />
-              <Route path="/our-business" element={<OurBusiness />} />
-              <Route path="/our-people" element={<OurPeople />} />
+              <Route path="/about" element={<About />} />
+              <Route path="/strategies" element={<Strategies />} />
+              <Route path="/strategies/multiplier" element={<MultiplierFund />} />
+              <Route path="/strategies/opportunity" element={<OpportunityFund />} />
+              <Route path="/strategies/lvf" element={<LVF />} />
+              <Route path="/strategies/spv" element={<SPV />} />
+              <Route path="/opportunities" element={<Opportunities />} />
+              <Route path="/transactions" element={<Transactions />} />
+              <Route path="/transactions/:id" element={<TransactionDetail />} />
+              <Route path="/leadership" element={<Leadership />} />
+              <Route path="/insights" element={<Blogs />} />
+              <Route path="/insights/faq" element={<FAQ />} />
+              <Route path="/insights/:slug" element={<BlogDetail />} />
               <Route path="/contact" element={<Contact />} />
               <Route path="/disclaimer" element={<Disclaimer />} />
 
-              <Route path="/funds/multiplier" element={<MultiplierFund />} />
-              <Route path="/funds/opportunity" element={<OpportunityFund />} />
-              <Route path="/funds/lvf" element={<LVF />} />
-              <Route path="/funds/spv" element={<SPV />} />
-
-              <Route path="/knowledge/blogs" element={<Blogs />} />
-              <Route path="/knowledge/blogs/:slug" element={<BlogDetail />} />
-              <Route path="/knowledge/faq" element={<FAQ />} />
+              {/* Legacy redirects */}
+              <Route path="/our-business" element={<Navigate to="/about" replace />} />
+              <Route path="/our-people" element={<Navigate to="/leadership" replace />} />
+              <Route path="/funds" element={<Navigate to="/strategies" replace />} />
+              <Route path="/funds/multiplier" element={<Navigate to="/strategies/multiplier" replace />} />
+              <Route path="/funds/opportunity" element={<Navigate to="/strategies/opportunity" replace />} />
+              <Route path="/funds/lvf" element={<Navigate to="/strategies/lvf" replace />} />
+              <Route path="/funds/spv" element={<Navigate to="/strategies/spv" replace />} />
+              <Route path="/knowledge" element={<Navigate to="/insights" replace />} />
+              <Route path="/knowledge/blogs" element={<Navigate to="/insights" replace />} />
+              <Route path="/knowledge/blogs/:slug" element={<LegacyBlogRedirect />} />
+              <Route path="/knowledge/faq" element={<Navigate to="/insights/faq" replace />} />
 
               <Route path="*" element={<NotFound />} />
             </Routes>
@@ -68,6 +96,6 @@ export default function App() {
         </Suspense>
       </main>
       <Footer />
-    </>
+    </MotionConfig>
   );
 }

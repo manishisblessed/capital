@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+Disallow: /disclaimer
+
+Sitemap: https://www.landmarkcapital.in/sitemap.xml
