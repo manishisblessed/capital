@@ -2,6 +2,8 @@ import { PageHero } from "@/components/common/PageHero";
 import { Reveal } from "@/components/common/Reveal";
 import { ButtonLink } from "@/components/common/Button";
 import { Seo } from "@/components/common/Seo";
+import { Timeline } from "@/components/sections/Timeline";
+import { Interviews } from "@/components/sections/Interviews";
 
 const principles = [
   {
@@ -103,6 +105,10 @@ export default function About() {
           </Reveal>
         </div>
       </section>
+
+      <Timeline />
+
+      <Interviews />
 
       <section className="section-pad bg-stone">
         <div className="container-tb">
